@@ -1,5 +1,7 @@
 # CinemaApp
 
+<img src="captures/design.png">
+
 ## Resources
 ### Material Design
 - BottomNavigation View
