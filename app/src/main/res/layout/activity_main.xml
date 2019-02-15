@@ -11,7 +11,9 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/navigation" />
+        android:layout_above="@id/navigation"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
