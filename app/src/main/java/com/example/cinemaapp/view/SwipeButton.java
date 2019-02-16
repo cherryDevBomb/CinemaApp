@@ -1,4 +1,4 @@
-package com.example.cinemaapp;
+package com.example.cinemaapp.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -21,6 +21,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.cinemaapp.R;
 
 /**
  * Custom view for Sliding Button (Confirm reservation)

@@ -4,10 +4,16 @@ public class Film {
 
     private String title;
     private String genre;
+    private String description;
+    private double rating;
+    private String imagePath;
 
-    public Film(String title, String genre) {
+    public Film(String title, String genre, String description, double rating, String imagePath) {
         this.title = title;
         this.genre = genre;
+        this.description = description;
+        this.rating = rating;
+        this.imagePath = imagePath;
     }
 
     public String getTitle() {
@@ -24,5 +30,29 @@ public class Film {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

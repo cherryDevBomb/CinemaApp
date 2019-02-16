@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         //keep selected fragment when rotating the device
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomePage()).commit();
+                    new HomeActivity()).commit();
         }
     }
 
@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    selectedFragment = new HomePage();
+                    selectedFragment = new HomeActivity();
                     break;
                 case R.id.navigation_reservation:
                     selectedFragment = new ReservationPage();
                     break;
                 case R.id.navigation_notifications:
-                    selectedFragment = new HomePage();
+                    selectedFragment = new HomeActivity();
                     System.out.println("mergeNot");
                     break;
             }
