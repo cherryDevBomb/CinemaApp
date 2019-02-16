@@ -1,4 +1,4 @@
-package com.example.cinemaapp;
+package com.example.cinemaapp.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 
+import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.FilmAdapter;
 

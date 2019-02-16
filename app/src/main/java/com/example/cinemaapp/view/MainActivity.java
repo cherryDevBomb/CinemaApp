@@ -1,4 +1,4 @@
-package com.example.cinemaapp;
+package com.example.cinemaapp.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.cinemaapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -3,6 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_reservations">Reservations</string>
     <string name="title_favorites">Favorites</string>
+    <string name="swipeButtonText">SWIPE TO RESERVE</string>
+    <string name="movieTitle">Title</string>
+    <string name="movieTime">13:30</string>
 
     <string-array name="genres_array">
         <item>All</item>
