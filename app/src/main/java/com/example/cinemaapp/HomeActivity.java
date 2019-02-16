@@ -99,19 +99,15 @@ public class HomeActivity extends Fragment {
 //    }
 
     private List<Film> getHardcodedList() {
-        List<Film> filmList = Arrays.asList(new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure"),
-                                            new Film("The martian", "Adventure")
+        List<Film> filmList = Arrays.asList(new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian")
+
         );
         return filmList;
     }

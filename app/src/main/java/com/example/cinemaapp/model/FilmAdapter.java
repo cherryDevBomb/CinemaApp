@@ -1,14 +1,15 @@
 package com.example.cinemaapp.model;
 
 import android.annotation.SuppressLint;
-import android.app.MediaRouteButton;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.example.cinemaapp.R;
@@ -34,6 +35,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         Film currentFilm = filmlist.get(position);
         holder.textViewTitle.setText(currentFilm.getTitle());
         holder.textViewGenre.setText(currentFilm.getGenre());
+        holder.textViewRating.setText(String.valueOf(currentFilm.getRating()));
+        holder.textViewDescription.setText(currentFilm.getDescription());
 
 
         //expand card
@@ -61,14 +64,22 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     }
 
     class FilmHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout detailsOnExpand;
+        private ImageView poster;
         private TextView textViewTitle;
         private TextView textViewGenre;
+        private TextView textViewRating;
+        private TextView textViewDescription;
+
+        private RelativeLayout detailsOnExpand;
 
         public FilmHolder(View itemView) {
             super(itemView);
+            poster = itemView.findViewById(R.id.film_poster);
+            poster.setImageResource(R.drawable.martian);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewGenre = itemView.findViewById(R.id.text_view_genre);
+            textViewRating = itemView.findViewById(R.id.text_view_rating);
+            textViewDescription = itemView.findViewById(R.id.text_view_description);
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
         }
     }
