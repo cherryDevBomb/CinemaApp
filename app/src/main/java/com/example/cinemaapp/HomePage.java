@@ -1,5 +1,6 @@
 package com.example.cinemaapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +16,14 @@ import com.example.cinemaapp.model.FilmAdapter;
 
 import java.util.Arrays;
 import java.util.List;
+import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 public class HomePage extends Fragment {
+    private Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +47,15 @@ public class HomePage extends Fragment {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
+        // button example to open MakeReservationActivity
+        button = view.findViewById(R.id.openPage);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPage();
+            }
+        });
+
         return view;
 
     }
@@ -60,5 +76,10 @@ public class HomePage extends Fragment {
                                             new Film("The martian", "Adventure")
         );
         return filmList;
+    }
+
+    private void openPage() {
+        Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
+        startActivity(intent);
     }
 }
