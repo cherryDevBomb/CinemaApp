@@ -76,13 +76,13 @@ public class HomeActivity extends Fragment {
         spinner.setAdapter(arrayAdapter);
 
         // button example to open MakeReservationActivity
-        button = view.findViewById(R.id.openPage);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPage();
-            }
-        });
+//        button = view.findViewById(R.id.openPage);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openPage();
+//            }
+//        });
 
         return view;
 
@@ -114,8 +114,5 @@ public class HomeActivity extends Fragment {
 
 
 
-    private void openPage() {
-        Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
-        startActivity(intent);
-    }
+
 }

@@ -1,20 +1,29 @@
 package com.example.cinemaapp.model;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.example.cinemaapp.MakeReservationActivity;
 import com.example.cinemaapp.R;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
@@ -35,7 +44,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         Film currentFilm = filmlist.get(position);
         holder.textViewTitle.setText(currentFilm.getTitle());
         holder.textViewGenre.setText(currentFilm.getGenre());
-        holder.textViewRating.setText(String.valueOf(currentFilm.getRating()));
+        holder.textViewRating.setText("  " + String.valueOf(currentFilm.getRating()));
         holder.textViewDescription.setText(currentFilm.getDescription());
 
 
@@ -72,6 +81,10 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
 
         private RelativeLayout detailsOnExpand;
 
+        private RadioGroup radioGroup;
+        private List<RadioButton> radioButtons;
+        private Button reserveButton;
+
         public FilmHolder(View itemView) {
             super(itemView);
             poster = itemView.findViewById(R.id.film_poster);
@@ -81,6 +94,37 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             textViewRating = itemView.findViewById(R.id.text_view_rating);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
+
+            //hardcoded
+            List<Time> times = Arrays.asList(new Time(12, 0, 0), new Time(16, 30, 0));
+            //
+
+            List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4, R.id.radio5);
+            radioButtons = new ArrayList<>();
+
+            for (int i = 0; i < times.size(); i++) {
+                RadioButton button = itemView.findViewById(ids.get(i));
+                Date date=new Date(times.get(i).getTime());
+                DateFormat df= new SimpleDateFormat("HH:mm");
+                button.setText(df.format(date));
+                button.setVisibility(View.VISIBLE);
+                radioButtons.add(button);           //may be optional?
+            }
+
+            radioGroup = itemView.findViewById(R.id.hour_choices);
+
+            reserveButton = itemView.findViewById(R.id.openPage);
+//            reserveButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    openPage();
+//                }
+//            });
         }
+
+//        private void openPage() {
+//            Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
+//            startActivity(intent);
+//        }
     }
 }
