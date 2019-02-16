@@ -72,7 +72,7 @@
         android:gravity="center"
         android:horizontalSpacing="4dp"
         android:numColumns="3"
-        android:stretchMode=""
+        android:stretchMode="spacingWidth"
         android:verticalSpacing="6dp"
         app:layout_constraintBottom_toTopOf="@id/placesInfoTextView2"
         app:layout_constraintRight_toRightOf="parent"
