@@ -5,11 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-
-import com.example.cinemaapp.model.FilmAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         //keep selected fragment when rotating the device
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomePage()).commit();
+                    new HomeActivity()).commit();
         }
     }
 
@@ -37,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    selectedFragment = new HomePage();
+                    selectedFragment = new HomeActivity();
                     break;
                 case R.id.navigation_reservation:
                     selectedFragment = new ReservationPage();
                     break;
                 case R.id.navigation_notifications:
-                    selectedFragment = new HomePage();
+                    selectedFragment = new HomeActivity();
                     System.out.println("mergeNot");
                     break;
             }
