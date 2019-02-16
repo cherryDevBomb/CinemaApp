@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:background="@drawable/comment_selection"
+    >
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -45,7 +47,7 @@
             android:layout_marginBottom="16dp"
             android:layout_below="@id/text_view_title"
             android:text="Genre"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@android:color/darker_gray"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <TextView
@@ -72,7 +74,7 @@
             android:layout_toRightOf="@+id/genre_rating_delimiter"
             android:layout_toEndOf="@+id/genre_rating_delimiter"
             android:text="Rating"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@android:color/darker_gray"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
 
@@ -109,6 +111,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="Description"
+                android:textColor="@android:color/darker_gray"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <View
