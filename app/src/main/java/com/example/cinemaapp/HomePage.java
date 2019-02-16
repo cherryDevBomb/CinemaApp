@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomePage extends Fragment {
+
     private Button button;
 
     @Override
