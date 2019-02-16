@@ -48,6 +48,21 @@
         android:textColor="#BCD8D8D8"
         android:textSize="18dp" />
 
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="433dp"
 
+        >
+
+    </GridView>
+
+    <com.example.cinemaapp.SwipeButton
+        android:id="@+id/swipe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
