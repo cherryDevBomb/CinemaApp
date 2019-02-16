@@ -1,8 +1,9 @@
-package com.example.cinemaapp;
+package com.example.cinemaapp.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.cinemaapp.R;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
 
 public class MakeReservationActivity extends AppCompatActivity implements MakeReservationPresenter.MainView {

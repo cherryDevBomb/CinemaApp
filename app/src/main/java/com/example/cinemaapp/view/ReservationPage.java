@@ -1,4 +1,4 @@
-package com.example.cinemaapp;
+package com.example.cinemaapp.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.cinemaapp.R;
 
 public class ReservationPage extends Fragment {
 
