@@ -30,7 +30,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/film_poster"
              />
@@ -43,7 +44,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"
             android:layout_below="@id/text_view_title"
-            android:text="Genre" />
+            android:text="Genre"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <TextView
             android:id="@+id/genre_rating_delimiter"
@@ -56,6 +59,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:text="|"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
              />
 
         <TextView
@@ -68,6 +72,8 @@
             android:layout_toRightOf="@+id/genre_rating_delimiter"
             android:layout_toEndOf="@+id/genre_rating_delimiter"
             android:text="Rating"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
 
         <TextView
@@ -102,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Description" />
+                android:text="Description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <View
                 android:id="@+id/program_delimiter"
@@ -117,7 +124,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/program_delimiter"
-                android:text="Tonight's availability" />
+                android:text="Tonight's availability"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
 
             <RadioGroup
                 android:id="@+id/hour_choices"
@@ -135,9 +145,14 @@
                     android:button="@android:color/transparent"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="Hour"
                     android:checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
                 <RadioButton
                     android:id="@+id/radio2"
@@ -147,9 +162,14 @@
                     android:button="@android:color/transparent"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="Hour"
                     android:checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
                 <RadioButton
                     android:id="@+id/radio3"
@@ -159,9 +179,14 @@
                     android:button="@android:color/transparent"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="Hour"
                     android:checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
                 <RadioButton
                     android:id="@+id/radio4"
@@ -171,22 +196,14 @@
                     android:button="@android:color/transparent"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="Hour"
                     android:checked="false"
-                    android:visibility="invisible"/>
-
-                <RadioButton
-                    android:id="@+id/radio5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@android:color/transparent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Hour"
-                    android:checked="false"
-                    android:visibility="invisible"/>
-
+                    android:visibility="invisible"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
             </RadioGroup>
 
@@ -197,7 +214,9 @@
                 android:layout_below="@+id/hour_choices"
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
-                android:text="Reserve"/>
+                android:text="RESERVE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/titleColor"/>
 
         </RelativeLayout>
 

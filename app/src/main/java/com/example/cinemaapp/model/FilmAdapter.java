@@ -3,6 +3,7 @@ package com.example.cinemaapp.model;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
@@ -15,7 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.cinemaapp.MakeReservationActivity;
+import com.example.cinemaapp.view.MakeReservationActivity;
 import com.example.cinemaapp.R;
 
 import java.sql.Date;
@@ -28,8 +29,12 @@ import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     private List<Film> filmlist = new ArrayList<>();
-
+    private Fragment contextGetter;
     private int mExpandedPosition = -1;
+
+    public FilmAdapter(Fragment contextGetter) {
+        this.contextGetter = contextGetter;
+    }
 
     @NonNull
     @Override
@@ -99,11 +104,11 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             List<Time> times = Arrays.asList(new Time(12, 0, 0), new Time(16, 30, 0));
             //
 
-            List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4, R.id.radio5);
+            List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4);
             radioButtons = new ArrayList<>();
 
             for (int i = 0; i < times.size(); i++) {
-                RadioButton button = itemView.findViewById(ids.get(i));
+                final RadioButton button = itemView.findViewById(ids.get(i));
                 Date date=new Date(times.get(i).getTime());
                 DateFormat df= new SimpleDateFormat("HH:mm");
                 button.setText(df.format(date));
@@ -114,17 +119,17 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             radioGroup = itemView.findViewById(R.id.hour_choices);
 
             reserveButton = itemView.findViewById(R.id.openPage);
-//            reserveButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    openPage();
-//                }
-//            });
+            reserveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openPage();
+                }
+            });
         }
 
-//        private void openPage() {
-//            Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
-//            startActivity(intent);
-//        }
+        private void openPage() {
+            Intent intent = new Intent(contextGetter.getActivity(), MakeReservationActivity.class);
+            contextGetter.startActivity(intent);
+        }
     }
 }

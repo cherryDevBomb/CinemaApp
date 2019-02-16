@@ -60,11 +60,10 @@ public class HomeActivity extends Fragment {
 
         //Add recyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-                //this.getContext instead of this
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        FilmAdapter adapter = new FilmAdapter();
+        FilmAdapter adapter = new FilmAdapter(this);
         recyclerView.setAdapter(adapter);
 
         adapter.setFilmlist(getHardcodedList());
@@ -75,15 +74,6 @@ public class HomeActivity extends Fragment {
                 R.array.genres_array, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-
-        // button example to open MakeReservationActivity
-//        button = view.findViewById(R.id.openPage);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openPage();
-//            }
-//        });
 
         return view;
 
