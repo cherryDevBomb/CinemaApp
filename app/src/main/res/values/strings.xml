@@ -3,4 +3,13 @@
     <string name="title_home">Home</string>
     <string name="title_reservations">Reservations</string>
     <string name="title_favorites">Favorites</string>
+
+    <string-array name="genres_array">
+        <item>All</item>
+        <item>Drama</item>
+        <item>Adventure</item>
+        <item>Thriller</item>
+        <item>Comedy</item>
+    </string-array>
+
 </resources>
