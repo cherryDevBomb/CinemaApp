@@ -1,7 +1,7 @@
 package com.example.cinemaapp.presenter;
 
 import com.example.cinemaapp.model.Film;
-import com.example.cinemaapp.model.FilmAdapter;
+import com.example.cinemaapp.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
