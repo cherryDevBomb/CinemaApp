@@ -1,6 +1,8 @@
 package com.example.cinemaapp.view;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,6 @@ import com.example.cinemaapp.R;
 import com.example.cinemaapp.controls.SwipeButton;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.GridViewAdapter;
-import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
 
 public class MakeReservationActivity extends AppCompatActivity implements MakeReservationPresenter.MainView {
@@ -23,7 +24,7 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         @Override
         public void onSwipeButtonExpanded(View v) {
             System.out.println("sent");
-            //saveReservation();
+            saveReservation();
         }
     };
 
@@ -76,11 +77,10 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
 
     @Override
     public void saveReservation() {
-        Reservation reservation = presenter.createReservation();
+        presenter.createReservation();
 
-        //Create intent to pass reservation to ReservationActivity
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra("reservation", reservation);
-        startActivity(intent);
+        //return to Parent
+        Intent parentIntent = NavUtils.getParentActivityIntent(this);
+        startActivity(parentIntent);
     }
 }

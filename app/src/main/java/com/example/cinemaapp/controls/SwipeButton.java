@@ -238,9 +238,16 @@ public class SwipeButton extends RelativeLayout {
         animatorSet.playTogether(positionAnimator, widthAnimator);
         animatorSet.start();
 
-        //raise event
-        if (listener != null)
-            listener.onSwipeButtonExpanded(this);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                //raise event
+                if (listener != null)
+                    listener.onSwipeButtonExpanded(SwipeButton.this);
+            }
+        });
     }
 
     /**

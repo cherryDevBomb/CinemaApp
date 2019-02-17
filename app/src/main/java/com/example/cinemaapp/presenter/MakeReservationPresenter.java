@@ -39,19 +39,20 @@ public class MakeReservationPresenter {
         view.setStartTime(time);
     }
 
-    public Reservation createReservation() {
+    public void createReservation() {
         //create object time from string
-        Time timeObj = null;
-        DateFormat formatter= new SimpleDateFormat("hh:mm");
-        try {
-             timeObj = new Time(formatter.parse(time).getTime());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        Time timeObj = null;
+//        DateFormat formatter= new SimpleDateFormat("hh:mm");
+//        try {
+//             timeObj = new Time(formatter.parse(time).getTime());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         //Create reservation
-        Reservation reservation = new Reservation(film, timeObj, "qr");
-        return reservation;
+        //Reservation reservation = new Reservation(film, timeObj, "qr");
+        //save to Repository
+
     }
 
     public interface MainView {
