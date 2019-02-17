@@ -1,7 +1,12 @@
 package com.example.cinemaapp.view;
 
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.cinemaapp.R;
@@ -17,9 +22,23 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         setContentView(R.layout.activity_make_reservation);
 
         presenter = new MakeReservationPresenter(this);
+
         GridView gridView = (GridView)findViewById(R.id.gridPlaces);
-        GridViewAdapter adapter = new GridViewAdapter(presenter.getListPlaces(), this);
+        final GridViewAdapter adapter = new GridViewAdapter(presenter.getListPlaces(), this);
         gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int selectedIndex = adapter.getSelectedPositions().indexOf(position);
+                if (selectedIndex > -1) {
+                    adapter.getSelectedPositions().remove(selectedIndex);
+                    ((Button)view).setBackgroundColor(Color.LTGRAY);
+                } else {
+                    adapter.getSelectedPositions().add(position);
+                    ((Button)view).setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.titleColor));
+                }
+            }
+        });
 
         getSupportActionBar().setTitle("Reserve");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
