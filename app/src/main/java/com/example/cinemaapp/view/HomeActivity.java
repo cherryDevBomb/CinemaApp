@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.FilmAdapter;
+import com.example.cinemaapp.presenter.Repository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +31,7 @@ import android.widget.Button;
 public class HomeActivity extends Fragment {
 
     private Button button;
+    private Repository repository = new Repository();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class HomeActivity extends Fragment {
         FilmAdapter adapter = new FilmAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        adapter.setFilmlist(getHardcodedList());
+        adapter.setFilmlist(repository.getHardcodedList());
 
         //Add spinner
         Spinner spinner = (Spinner) view.findViewById(R.id.filter_spinner);
@@ -94,20 +96,4 @@ public class HomeActivity extends Fragment {
 //        homeParams.height = containerParams.height;
 //        homeLayout.setLayoutParams(homeParams);
 //    }
-
-    private List<Film> getHardcodedList() {
-        List<Film> filmList = Arrays.asList(new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian)
-
-        );
-        return filmList;
-    }
-
-
-
-
 }
