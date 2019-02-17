@@ -1,7 +1,7 @@
 package com.example.cinemaapp.model;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +15,19 @@ import java.util.List;
 
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationHolder> {
 
-    private List<Reservation> reservationList;
+    private List<Reservation> reservationList = new ArrayList<>();
+    private Fragment context;
 
-    public ReservationAdapter(List<Reservation> reservationList){
+    public ReservationAdapter(Fragment context) {
 
+        this.context = context;
+    }
+
+    public void setReservationList(List<Reservation> reservationList) {
         this.reservationList = reservationList;
     }
 
-    class ReservationHolder extends RecyclerView.ViewHolder{
+    class ReservationHolder extends RecyclerView.ViewHolder {
 
         TextView textTitle;
         TextView textStartingTime;
@@ -50,7 +55,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         Reservation reservation = reservationList.get(position);
 
         reservationHolder.textTitle.setText(reservation.getFilm().getTitle());
-        reservationHolder.textTitle.setText(reservation.getStartTime().toString());
+        reservationHolder.textStartingTime.setText(reservation.getStartTime().toString());
     }
 
     @Override
@@ -59,4 +64,29 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     }
 
 
+    public void addReservation(Reservation reservation) {
+
+        if (!searchReservation(reservation)) {
+
+            reservationList.add(reservation);
+        }
+
+    }
+
+    private boolean searchReservation(Reservation reservation) {
+
+        for (Reservation r : reservationList) {
+
+            if (r.equals(reservation))
+                return true;
+        }
+        return false;
+    }
+
+    public void removeReservation(int position) {
+
+        reservationList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, reservationList.size());
+    }
 }
