@@ -8,7 +8,6 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/comment_selection"
     >
 
     <RelativeLayout
@@ -31,6 +30,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Title"
@@ -235,7 +236,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
                 android:text=""
-                android:drawableRight="@drawable/ic_favorite_border_black_24dp"
+                android:drawableRight="@drawable/ic_favorite_border_black_35dp"
                 />
 
         </RelativeLayout>

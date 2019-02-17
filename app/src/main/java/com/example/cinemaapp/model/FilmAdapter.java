@@ -135,8 +135,10 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                 public void onClick(View v) {
                     int selectedId = radioGroup.getCheckedRadioButtonId();
                     RadioButton selectedButton = (RadioButton) itemView.findViewById(selectedId);
-                    String selectedTime = (String)selectedButton.getText();
-                    openPage(filmObject, selectedTime);
+                    if (selectedButton != null) {
+                        String selectedTime = (String) selectedButton.getText();
+                        openPage(filmObject, selectedTime);
+                    }
                 }
             });
 
@@ -147,12 +149,12 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                 public void onClick(View v) {
                     boolean isFavorite = filmObject.isFavorite();
                     if (!isFavorite) {
-                        favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_black_24dp, 0);
+                        favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
                         filmObject.setFavorite(true);
                         //add to favorites in repo
                     }
                     else {
-                        favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_24dp, 0);
+                        favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
                         filmObject.setFavorite(false);
                         //delete from favorites in repo
                     }
