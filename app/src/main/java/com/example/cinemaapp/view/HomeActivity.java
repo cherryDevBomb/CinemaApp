@@ -37,35 +37,6 @@ public class HomeActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home_activity, container, false);
 
-
-                                ///try to set desired height
-        view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-
-            @Override
-            public boolean onPreDraw() {
-                WindowManager windowmanager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
-                DisplayMetrics dimension = new DisplayMetrics();
-                windowmanager.getDefaultDisplay().getMetrics(dimension);
-                final int screenHeight = dimension.heightPixels;
-
-                view.getViewTreeObserver().removeOnPreDrawListener(this);
-
-                int maxHeight = view.getHeight();
-                int h = ((BottomNavigationView)getActivity().findViewById(R.id.navigation)).getLayoutParams().height;
-
-                //BottomNavigationView bottomBar = .findViewById(R.id.navigation);
-                //int bottomBarHeight = getActivity().findViewById(R.id.navigation);
-
-                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-                layoutParams.height = maxHeight - h;
-                view.setLayoutParams(layoutParams);
-
-                return true;
-            }
-        });
-
-
-
         //Add recyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
