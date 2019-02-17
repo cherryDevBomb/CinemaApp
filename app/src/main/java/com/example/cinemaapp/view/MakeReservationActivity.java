@@ -3,9 +3,11 @@ package com.example.cinemaapp.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.GridView;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
+import com.example.cinemaapp.model.GridViewAdapter;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
 
 public class MakeReservationActivity extends AppCompatActivity implements MakeReservationPresenter.MainView {
@@ -17,6 +19,9 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         setContentView(R.layout.activity_make_reservation);
 
         presenter = new MakeReservationPresenter(this);
+        GridView gridView = (GridView)findViewById(R.id.gridPlaces);
+        GridViewAdapter adapter = new GridViewAdapter(presenter.getListPlaces(), this);
+        gridView.setAdapter(adapter);
 
         /////////////////////////////////////////////////////////
         //retrieve values from Intent

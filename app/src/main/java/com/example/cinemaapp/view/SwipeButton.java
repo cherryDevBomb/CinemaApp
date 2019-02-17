@@ -84,7 +84,7 @@ public class SwipeButton extends RelativeLayout {
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         centerText.setText(getContext().getString(R.string.swipeButtonText));
         centerText.setTextColor(Color.WHITE);
-        centerText.setPadding(35, 35, 35, 35);
+        centerText.setPadding(25, 25, 25, 25);
         background.addView(centerText, layoutParams);
 
         //add the moving icon
