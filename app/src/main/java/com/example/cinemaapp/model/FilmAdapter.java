@@ -98,6 +98,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
 
         public FilmHolder(final View itemView) {
             super(itemView);
+
             poster = itemView.findViewById(R.id.film_poster);
             poster.setImageResource(R.drawable.martian);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
