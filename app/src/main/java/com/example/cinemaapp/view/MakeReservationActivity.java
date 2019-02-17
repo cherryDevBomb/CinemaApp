@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
@@ -23,7 +25,15 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
 
-        presenter = new MakeReservationPresenter(this);
+        //retrieve values from Intent
+        Intent creatorIntent = getIntent();
+        Film film = (Film)creatorIntent.getSerializableExtra("film");
+        String time = creatorIntent.getStringExtra("time");
+
+        presenter = new MakeReservationPresenter(this, film, time);
+        presenter.updatePoster();
+        presenter.updateTitle();
+        presenter.updateStartTime();
 
         GridView gridView = (GridView)findViewById(R.id.gridPlaces);
         final GridViewAdapter adapter = new GridViewAdapter(presenter.getListPlaces(), this);
@@ -42,34 +52,26 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
             }
         });
 
-        /////////////////////////////////////////////////////////
-        //retrieve values from Intent
-//        Intent creatorIntent = getIntent();
-//        Film filmObject = (Film)creatorIntent.getSerializableExtra("film");
-//        String time = creatorIntent.getStringExtra("time");
-        /////////////////////////////////////////////////////////
-
         getSupportActionBar().setTitle("Reserve");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public void showPlaces(int[][] places) {
-
-    }
 
     @Override
-    public void setPoster(String moviePoster) {
-
+    public void setPoster(int moviePosterID) {
+        ImageView posterImageView = (ImageView)findViewById(R.id.moviePosterImageView);
+        posterImageView.setImageResource(moviePosterID);
     }
 
     @Override
     public void setMovieTitle(String title) {
-
+        TextView titleTextView = (TextView)findViewById(R.id.movieTitleTextView);
+        titleTextView.setText(title);
     }
 
     @Override
     public void setStartTime(String time) {
-
+        TextView timeTextView = (TextView)findViewById(R.id.movieHourTextView);
+        timeTextView.setText(time);
     }
 }
