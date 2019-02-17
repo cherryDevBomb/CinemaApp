@@ -47,11 +47,11 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     @Override
     public void onBindViewHolder(@NonNull final FilmHolder holder, final int position) {
         Film currentFilm = filmlist.get(position);
+        holder.filmObject = currentFilm;
         holder.textViewTitle.setText(currentFilm.getTitle());
         holder.textViewGenre.setText(currentFilm.getGenre());
         holder.textViewRating.setText("  " + String.valueOf(currentFilm.getRating()));
         holder.textViewDescription.setText(currentFilm.getDescription());
-
 
         //expand card
         final boolean isExpanded = position==mExpandedPosition;
@@ -61,6 +61,12 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
+                if (!isExpanded) {
+                    holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_up_black_24dp, 0);
+                }
+                else {
+                    holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_down_black_24dp, 0);
+                }
                 mExpandedPosition = isExpanded ? -1:position;
                 TransitionManager.beginDelayedTransition(holder.detailsOnExpand);
                 notifyDataSetChanged();
@@ -78,25 +84,27 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     }
 
     class FilmHolder extends RecyclerView.ViewHolder {
+        private Film filmObject;
+
         private ImageView poster;
         private TextView textViewTitle;
         private TextView textViewGenre;
         private TextView textViewRating;
+        private TextView expandIcon;
         private TextView textViewDescription;
-
         private RelativeLayout detailsOnExpand;
-
         private RadioGroup radioGroup;
-        private List<RadioButton> radioButtons;
         private Button reserveButton;
 
-        public FilmHolder(View itemView) {
+        public FilmHolder(final View itemView) {
             super(itemView);
+
             poster = itemView.findViewById(R.id.film_poster);
             poster.setImageResource(R.drawable.martian);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewGenre = itemView.findViewById(R.id.text_view_genre);
             textViewRating = itemView.findViewById(R.id.text_view_rating);
+            expandIcon = itemView.findViewById(R.id.expand_icon);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
 
@@ -105,7 +113,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             //
 
             List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4);
-            radioButtons = new ArrayList<>();
 
             for (int i = 0; i < times.size(); i++) {
                 final RadioButton button = itemView.findViewById(ids.get(i));
@@ -113,7 +120,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                 DateFormat df= new SimpleDateFormat("HH:mm");
                 button.setText(df.format(date));
                 button.setVisibility(View.VISIBLE);
-                radioButtons.add(button);           //may be optional?
             }
 
             radioGroup = itemView.findViewById(R.id.hour_choices);
@@ -122,13 +128,18 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             reserveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openPage();
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    RadioButton selectedButton = (RadioButton) itemView.findViewById(selectedId);
+                    String selectedTime = (String)selectedButton.getText();
+                    openPage(filmObject, selectedTime);
                 }
             });
         }
 
-        private void openPage() {
+        private void openPage(Film film, String time) {
             Intent intent = new Intent(contextGetter.getActivity(), MakeReservationActivity.class);
+            intent.putExtra("film", film);
+            intent.putExtra("time", time);
             contextGetter.startActivity(intent);
         }
     }

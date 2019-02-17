@@ -2,6 +2,7 @@ package com.example.cinemaapp.view;
 
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.cinemaapp.R;
+import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.GridViewAdapter;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
 
@@ -39,6 +41,13 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
                 }
             }
         });
+
+        /////////////////////////////////////////////////////////
+        //retrieve values from Intent
+//        Intent creatorIntent = getIntent();
+//        Film filmObject = (Film)creatorIntent.getSerializableExtra("film");
+//        String time = creatorIntent.getStringExtra("time");
+        /////////////////////////////////////////////////////////
 
         getSupportActionBar().setTitle("Reserve");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
