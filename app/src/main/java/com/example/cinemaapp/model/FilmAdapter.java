@@ -48,6 +48,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     public void onBindViewHolder(@NonNull final FilmHolder holder, final int position) {
         Film currentFilm = filmlist.get(position);
         holder.filmObject = currentFilm;
+        holder.poster.setImageResource(currentFilm.getImagePath());
         holder.textViewTitle.setText(currentFilm.getTitle());
         holder.textViewGenre.setText(currentFilm.getGenre());
         holder.textViewRating.setText("  " + String.valueOf(currentFilm.getRating()));
@@ -100,7 +101,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             super(itemView);
 
             poster = itemView.findViewById(R.id.film_poster);
-            poster.setImageResource(R.drawable.martian);
+            //poster.setImageResource(R.drawable.martian);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewGenre = itemView.findViewById(R.id.text_view_genre);
             textViewRating = itemView.findViewById(R.id.text_view_rating);

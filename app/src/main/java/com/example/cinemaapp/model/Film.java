@@ -8,9 +8,9 @@ public class Film implements Serializable {
     private String genre;
     private String description;
     private double rating;
-    private String imagePath;
+    private int imagePath;
 
-    public Film(String title, String genre, String description, double rating, String imagePath) {
+    public Film(String title, String genre, String description, double rating, int imagePath) {
         this.title = title;
         this.genre = genre;
         this.description = description;
@@ -50,11 +50,11 @@ public class Film implements Serializable {
         this.rating = rating;
     }
 
-    public String getImagePath() {
+    public int getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
+    public void setImagePath(int imagePath) {
         this.imagePath = imagePath;
     }
 }

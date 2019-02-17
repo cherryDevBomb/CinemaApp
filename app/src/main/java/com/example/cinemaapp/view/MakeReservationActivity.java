@@ -25,10 +25,12 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
 
         /////////////////////////////////////////////////////////
         //retrieve values from Intent
-//        Intent creatorIntent = getIntent();
-//        Film filmObject = (Film)creatorIntent.getSerializableExtra("film");
-//        String time = creatorIntent.getStringExtra("time");
+        Intent creatorIntent = getIntent();
+        Film filmObject = (Film)creatorIntent.getSerializableExtra("film");
+        String time = creatorIntent.getStringExtra("time");
         /////////////////////////////////////////////////////////
+        System.out.println(filmObject.getTitle());
+        System.out.println(time);
 
         getSupportActionBar().setTitle("Reserve");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
