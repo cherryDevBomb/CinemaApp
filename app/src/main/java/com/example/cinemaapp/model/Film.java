@@ -9,6 +9,7 @@ public class Film implements Serializable {
     private String description;
     private double rating;
     private int imagePath;
+    private boolean isFavorite;
 
     public Film(String title, String genre, String description, double rating, int imagePath) {
         this.title = title;
@@ -16,6 +17,7 @@ public class Film implements Serializable {
         this.description = description;
         this.rating = rating;
         this.imagePath = imagePath;
+        isFavorite = false;
     }
 
     public String getTitle() {
@@ -56,5 +58,13 @@ public class Film implements Serializable {
 
     public void setImagePath(int imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

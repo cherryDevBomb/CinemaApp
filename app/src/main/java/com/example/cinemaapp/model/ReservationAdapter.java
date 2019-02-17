@@ -63,26 +63,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         return reservationList.size();
     }
 
-
-    public void addReservation(Reservation reservation) {
-
-        if (!searchReservation(reservation)) {
-
-            reservationList.add(reservation);
-        }
-
-    }
-
-    private boolean searchReservation(Reservation reservation) {
-
-        for (Reservation r : reservationList) {
-
-            if (r.equals(reservation))
-                return true;
-        }
-        return false;
-    }
-
     public void removeReservation(int position) {
 
         reservationList.remove(position);

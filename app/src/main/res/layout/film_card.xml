@@ -220,8 +220,23 @@
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
                 android:text="RESERVE"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:textColor="@color/titleColor"/>
+
+            <Button
+                android:id="@+id/heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hour_choices"
+                android:layout_toRightOf="@id/openPage"
+                android:gravity="right"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text=""
+                android:drawableRight="@drawable/ic_favorite_border_black_24dp"
+                />
 
         </RelativeLayout>
 
