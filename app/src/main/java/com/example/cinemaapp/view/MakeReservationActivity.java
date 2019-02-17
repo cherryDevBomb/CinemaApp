@@ -23,7 +23,6 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
     private SwipeButton.OnSwipeButtonExpandedListener swipeButtonExpandedListener = new SwipeButton.OnSwipeButtonExpandedListener() {
         @Override
         public void onSwipeButtonExpanded(View v) {
-            System.out.println("sent");
             saveReservation();
         }
     };
