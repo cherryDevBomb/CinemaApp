@@ -54,6 +54,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         holder.textViewRating.setText("  " + String.valueOf(currentFilm.getRating()));
         holder.textViewDescription.setText(currentFilm.getDescription());
 
+
         //expand card
         final boolean isExpanded = position==mExpandedPosition;
         holder.detailsOnExpand.setVisibility(isExpanded?View.VISIBLE:View.GONE);
@@ -96,18 +97,21 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         private RelativeLayout detailsOnExpand;
         private RadioGroup radioGroup;
         private Button reserveButton;
+        private Button favorite;
+        private boolean isFavorite;
+
 
         public FilmHolder(final View itemView) {
             super(itemView);
 
             poster = itemView.findViewById(R.id.film_poster);
-            //poster.setImageResource(R.drawable.martian);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewGenre = itemView.findViewById(R.id.text_view_genre);
             textViewRating = itemView.findViewById(R.id.text_view_rating);
             expandIcon = itemView.findViewById(R.id.expand_icon);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
+
 
             //hardcoded
             List<Time> times = Arrays.asList(new Time(12, 0, 0), new Time(16, 30, 0));
@@ -135,6 +139,26 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                     openPage(filmObject, selectedTime);
                 }
             });
+
+
+            favorite = itemView.findViewById(R.id.heart);
+            favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean isFavorite = filmObject.isFavorite();
+                    if (!isFavorite) {
+                        favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_black_24dp, 0);
+                        filmObject.setFavorite(true);
+                        //add to favorites in repo
+                    }
+                    else {
+                        favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_24dp, 0);
+                        filmObject.setFavorite(false);
+                        //delete from favorites in repo
+                    }
+                }
+            });
+
         }
 
         private void openPage(Film film, String time) {
