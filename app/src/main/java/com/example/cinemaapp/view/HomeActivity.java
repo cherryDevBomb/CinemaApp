@@ -37,24 +37,30 @@ public class HomeActivity extends Fragment {
 
 
                                 ///try to set desired height
-//        view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-//
-//            @Override
-//            public boolean onPreDraw() {
-//                WindowManager windowmanager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
-//                DisplayMetrics dimension = new DisplayMetrics();
-//                windowmanager.getDefaultDisplay().getMetrics(dimension);
-//                final int screenHeight = dimension.heightPixels;
-//
-//                view.getViewTreeObserver().removeOnPreDrawListener(this);
-//                int maxHeight = view.getHeight();
-//                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-//                layoutParams.height = maxHeight;
-//                view.setLayoutParams(layoutParams);
-//
-//                return true;
-//            }
-//        });
+        view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+
+            @Override
+            public boolean onPreDraw() {
+                WindowManager windowmanager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+                DisplayMetrics dimension = new DisplayMetrics();
+                windowmanager.getDefaultDisplay().getMetrics(dimension);
+                final int screenHeight = dimension.heightPixels;
+
+                view.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                int maxHeight = view.getHeight();
+                int h = ((BottomNavigationView)getActivity().findViewById(R.id.navigation)).getLayoutParams().height;
+
+                //BottomNavigationView bottomBar = .findViewById(R.id.navigation);
+                //int bottomBarHeight = getActivity().findViewById(R.id.navigation);
+
+                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+                layoutParams.height = maxHeight - h;
+                view.setLayoutParams(layoutParams);
+
+                return true;
+            }
+        });
 
 
 
@@ -90,14 +96,12 @@ public class HomeActivity extends Fragment {
 //    }
 
     private List<Film> getHardcodedList() {
-        List<Film> filmList = Arrays.asList(new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian"),
-                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, "martian")
+        List<Film> filmList = Arrays.asList(new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
+                                            new Film("The martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian)
 
         );
         return filmList;
