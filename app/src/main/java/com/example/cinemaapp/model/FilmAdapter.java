@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.cinemaapp.repository.Repository;
 import com.example.cinemaapp.view.MakeReservationActivity;
 import com.example.cinemaapp.R;
 
@@ -25,6 +26,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
@@ -54,6 +56,13 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         holder.textViewRating.setText("  " + String.valueOf(currentFilm.getRating()));
         holder.textViewDescription.setText(currentFilm.getDescription());
 
+        List<Time> times = Repository.getHardcodedProgram().get(currentFilm.getTitle());
+        for (int i = 0; i < times.size(); i++) {
+                Date date=new Date(times.get(i).getTime());
+                DateFormat df= new SimpleDateFormat("HH:mm");
+                holder.buttons.get(i).setText(df.format(date));
+                holder.buttons.get(i).setVisibility(View.VISIBLE);
+        }
 
         //expand card
         final boolean isExpanded = position==mExpandedPosition;
@@ -96,9 +105,9 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         private TextView textViewDescription;
         private RelativeLayout detailsOnExpand;
         private RadioGroup radioGroup;
+        List<RadioButton> buttons = new ArrayList<>();
         private Button reserveButton;
         private Button favorite;
-        private boolean isFavorite;
 
 
         public FilmHolder(final View itemView) {
@@ -112,19 +121,10 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
 
-
-            //hardcoded
-            List<Time> times = Arrays.asList(new Time(12, 0, 0), new Time(16, 30, 0));
-            //
-
             List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4);
-
-            for (int i = 0; i < times.size(); i++) {
+            for (int i = 0; i < 4; i++) {
                 final RadioButton button = itemView.findViewById(ids.get(i));
-                Date date=new Date(times.get(i).getTime());
-                DateFormat df= new SimpleDateFormat("HH:mm");
-                button.setText(df.format(date));
-                button.setVisibility(View.VISIBLE);
+                buttons.add(button);
             }
 
             radioGroup = itemView.findViewById(R.id.hour_choices);
