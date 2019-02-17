@@ -42,7 +42,7 @@ public class GridViewAdapter extends BaseAdapter {
             button.setLayoutParams(new GridView.LayoutParams(85, 85));
             button.setPadding(8,8,8,8);
             button.setText(Integer.toString(listOfPlaces.get(position)));
-            button.setBackgroundColor(Color.DKGRAY);
+            button.setBackgroundColor(Color.LTGRAY);
             button.setTextColor(Color.BLACK);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
