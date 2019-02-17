@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.example.cinemaapp.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GridViewAdapter extends BaseAdapter {
@@ -19,14 +20,10 @@ public class GridViewAdapter extends BaseAdapter {
     private List<Integer> selectedPositions;
     private Context mContext;
 
-    public GridViewAdapter(List<Integer> listOfPlaces, Context mContext) {
-        this.listOfPlaces = listOfPlaces;
+    public GridViewAdapter(Context mContext) {
+        this.listOfPlaces = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         this.mContext = mContext;
         this.selectedPositions = new ArrayList<>();
-    }
-
-    public List<Integer> getSelectedPositions() {
-        return selectedPositions;
     }
 
     @Override

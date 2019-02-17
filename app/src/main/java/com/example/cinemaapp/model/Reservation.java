@@ -1,8 +1,9 @@
 package com.example.cinemaapp.model;
 
+import java.io.Serializable;
 import java.sql.Time;
 
-public class Reservation {
+public class Reservation implements Serializable {
 
     private Film film;
     private Time startTime;

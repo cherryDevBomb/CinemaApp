@@ -2,8 +2,13 @@ package com.example.cinemaapp.presenter;
 
 
 import com.example.cinemaapp.model.Film;
+import com.example.cinemaapp.model.Reservation;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class MakeReservationPresenter {
@@ -16,7 +21,6 @@ public class MakeReservationPresenter {
         this.view = view;
         this.film = film;
         this.time = time;
-        this.listPlaces = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
     }
 
     public List<Integer> getListPlaces() {
@@ -24,7 +28,7 @@ public class MakeReservationPresenter {
     }
 
     public void updatePoster() {
-        //view.setPoster(film.getImagePath());
+        view.setPoster(film.getImagePath());
     }
 
     public void updateTitle() {
@@ -35,9 +39,25 @@ public class MakeReservationPresenter {
         view.setStartTime(time);
     }
 
+    public Reservation createReservation() {
+        //create object time from string
+        Time timeObj = null;
+        DateFormat formatter= new SimpleDateFormat("hh:mm");
+        try {
+             timeObj = new Time(formatter.parse(time).getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Create reservation
+        Reservation reservation = new Reservation(film, timeObj, "qr");
+        return reservation;
+    }
+
     public interface MainView {
         void setPoster(int moviePosterID);
         void setMovieTitle(String title);
         void setStartTime(String time);
+        void saveReservation();
     }
 }

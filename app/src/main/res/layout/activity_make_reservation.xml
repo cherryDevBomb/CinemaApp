@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/moviePosterImageView"
         android:layout_height="0dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_marginBottom="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/wonderw"
@@ -129,7 +129,7 @@
         app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
         app:layout_constraintLeft_toRightOf="@+id/placesInfoTextView2" />
 
-    <com.example.cinemaapp.view.SwipeButton
+    <com.example.cinemaapp.controls.SwipeButton
         android:id="@+id/swipe_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

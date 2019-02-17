@@ -1,59 +1,58 @@
 package com.example.cinemaapp.view;
 
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cinemaapp.R;
+import com.example.cinemaapp.controls.SwipeButton;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.GridViewAdapter;
+import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
 
 public class MakeReservationActivity extends AppCompatActivity implements MakeReservationPresenter.MainView {
     private MakeReservationPresenter presenter;
+
+    private SwipeButton swipeButton;
+    private SwipeButton.OnSwipeButtonExpandedListener swipeButtonExpandedListener = new SwipeButton.OnSwipeButtonExpandedListener() {
+        @Override
+        public void onSwipeButtonExpanded(View v) {
+            System.out.println("sent");
+            //saveReservation();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
 
+        getSupportActionBar().setTitle("Reserve");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //retrieve values from Intent
         Intent creatorIntent = getIntent();
         Film film = (Film)creatorIntent.getSerializableExtra("film");
         String time = creatorIntent.getStringExtra("time");
 
+        //create the presenter and update the with the new film information on View
         presenter = new MakeReservationPresenter(this, film, time);
         presenter.updatePoster();
         presenter.updateTitle();
         presenter.updateStartTime();
 
         GridView gridView = (GridView)findViewById(R.id.gridPlaces);
-        final GridViewAdapter adapter = new GridViewAdapter(presenter.getListPlaces(), this);
+        final GridViewAdapter adapter = new GridViewAdapter(this);
         gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int selectedIndex = adapter.getSelectedPositions().indexOf(position);
-                if (selectedIndex > -1) {
-                    adapter.getSelectedPositions().remove(selectedIndex);
-                    ((Button)view).setBackgroundColor(Color.LTGRAY);
-                } else {
-                    adapter.getSelectedPositions().add(position);
-                    ((Button)view).setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.titleColor));
-                }
-            }
-        });
 
-        getSupportActionBar().setTitle("Reserve");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Attach swipe listener to SwipeButton
+        swipeButton = findViewById(R.id.swipe_btn);
+        swipeButton.setSwipeListener(swipeButtonExpandedListener);
     }
 
 
@@ -73,5 +72,15 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
     public void setStartTime(String time) {
         TextView timeTextView = (TextView)findViewById(R.id.movieHourTextView);
         timeTextView.setText(time);
+    }
+
+    @Override
+    public void saveReservation() {
+        Reservation reservation = presenter.createReservation();
+
+        //Create intent to pass reservation to ReservationActivity
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("reservation", reservation);
+        startActivity(intent);
     }
 }
