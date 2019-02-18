@@ -8,6 +8,8 @@ import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,7 +21,7 @@ public class Repository {
     static List<Reservation> reservationList = new ArrayList<>();
     public static List<Film> favoriteList = new ArrayList<>();
     private static HashMap<String, HashMap<Time, List<Boolean>>> program;
-    static List<Boolean> cinemaPlaces = Arrays.asList(true, true, true, true, true, true, true, true, true);
+    static List<Boolean> cinemaPlaces;
 
     public static List<Film> getHardcodedList() {
         List<Film> filmList = Arrays.asList(
@@ -129,8 +131,23 @@ public class Repository {
         return program;
     }
 
-    
-    public static List<Boolean> getCinemaPlaces() {
+    /**
+     * Get cinemaPlaces for selected film at selected startTime
+     * @param filmTitle
+     * @param time
+     * @return
+     */
+    public static List<Boolean> getCinemaPlaces(String filmTitle, String time) {
+        //transform time from string to Time obj
+        Time timeObj = null;
+        DateFormat formatter= new SimpleDateFormat("hh:mm");
+        try {
+            timeObj = new Time(formatter.parse(time).getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        cinemaPlaces = getHardcodedProgram().get(filmTitle).get(timeObj);
         return cinemaPlaces;
     }
 
