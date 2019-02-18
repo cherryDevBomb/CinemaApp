@@ -16,6 +16,7 @@ import com.example.cinemaapp.controls.SwipeButton;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.GridViewAdapter;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
+import com.example.cinemaapp.repository.Repository;
 
 public class MakeReservationActivity extends AppCompatActivity implements MakeReservationPresenter.MainView {
     private MakeReservationPresenter presenter;
@@ -61,6 +62,7 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
 
         GridView gridView = (GridView)findViewById(R.id.gridPlaces);
         adapter = new GridViewAdapter(this);
+        adapter.setCinemaPlacesState(Repository.getCinemaPlaces(film.getTitle(), time));
         gridView.setAdapter(adapter);
 
         //Attach swipe listener to SwipeButton

@@ -20,11 +20,17 @@ public class GridViewAdapter extends BaseAdapter {
     private List<Integer> listOfPlaces;
     private List<Integer> selectedPositions;
     private Context mContext;
+    
+    private List<Boolean> cinemaPlacesState; 
 
     public GridViewAdapter(Context mContext) {
         this.listOfPlaces = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         this.mContext = mContext;
         this.selectedPositions = new ArrayList<>();
+    }
+
+    public void setCinemaPlacesState(List<Boolean> cinemaPlacesState) {
+        this.cinemaPlacesState = cinemaPlacesState;
     }
 
     @Override
@@ -50,10 +56,10 @@ public class GridViewAdapter extends BaseAdapter {
             button.setLayoutParams(new GridView.LayoutParams(100, 100));
             button.setPadding(8,8,8,8);
             button.setText(Integer.toString(listOfPlaces.get(position)));
-            if (!Repository.getCinemaPlaces().get(position)) {
+            if (!cinemaPlacesState.get(position)) {
                 button.setBackgroundColor(Color.LTGRAY);
                 button.setEnabled(false);
-            } else if (Repository.getCinemaPlaces().get(position)){
+            } else if (cinemaPlacesState.get(position)){
                 button.setBackgroundColor(Color.rgb(53, 172, 72));
             }
             button.setTextColor(Color.BLACK);
@@ -64,10 +70,10 @@ public class GridViewAdapter extends BaseAdapter {
 
                     //allow multiple select
                     int selectedIndex = selectedPositions.indexOf(pos);
-                    if (Repository.getCinemaPlaces().get(pos) && selectedIndex > -1) {
+                    if (cinemaPlacesState.get(pos) && selectedIndex > -1) {
                         selectedPositions.remove(selectedIndex);
                         ((Button) view).setBackgroundColor(Color.rgb(53, 172, 72));
-                    } else if (Repository.getCinemaPlaces().get(pos) && selectedIndex == -1){
+                    } else if (cinemaPlacesState.get(pos) && selectedIndex == -1){
                         selectedPositions.add(pos);
                         ((Button) view).setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.titleColor));
                     }
