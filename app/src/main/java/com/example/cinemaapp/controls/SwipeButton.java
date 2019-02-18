@@ -1,4 +1,4 @@
-package com.example.cinemaapp.view;
+package com.example.cinemaapp.controls;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -28,6 +28,16 @@ import com.example.cinemaapp.R;
  * Custom view for Sliding Button (Confirm reservation)
  */
 public class SwipeButton extends RelativeLayout {
+    private OnSwipeButtonExpandedListener listener;
+
+    public interface OnSwipeButtonExpandedListener {
+        void onSwipeButtonExpanded(View v);
+    }
+
+    public void setSwipeListener(OnSwipeButtonExpandedListener listener) {
+        this.listener = listener;
+    }
+
     private ImageView slidingButton;
     private float initialX;
     private boolean active;
@@ -227,6 +237,17 @@ public class SwipeButton extends RelativeLayout {
 
         animatorSet.playTogether(positionAnimator, widthAnimator);
         animatorSet.start();
+
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                //raise event
+                if (listener != null)
+                    listener.onSwipeButtonExpanded(SwipeButton.this);
+            }
+        });
     }
 
     /**

@@ -1,20 +1,26 @@
-package com.example.cinemaapp.presenter;
+package com.example.cinemaapp.repository;
+
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class Repository {
+    static List<Film> filmList = new ArrayList<>();
+    static List<Reservation> reservationList = new ArrayList<>();
+    static List<Film> favoriteList = new ArrayList<>();
+    static List<Boolean> cinemaPlaces = Arrays.asList(true, true, true, true, true, true, true, true, true);
 
-    List<Film> filmList = new ArrayList<>();
-    List<Reservation> reservationList = new ArrayList<>();
-    List<Film> favoriteList = new ArrayList<>();
-
-    public List<Film> getHardcodedList() {
+    public static List<Film> getHardcodedList() {
         List<Film> filmList = Arrays.asList(
                 new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
                 new Film("La La Land", "Drama", "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future. ", 8.0, R.drawable.lalaland),
@@ -38,17 +44,24 @@ public class Repository {
         return filmList;
     }
 
-
-    public void addReservation(Reservation reservation) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void addReservation(Reservation reservation) {
 
         if (!searchReservation(reservation)) {
 
             reservationList.add(reservation);
+            markReservedPlaces(reservation.getPlaces());
         }
-
     }
 
-    private boolean searchReservation(Reservation reservation) {
+    private static void markReservedPlaces(List<Integer> places) {
+        for (int i : places) {
+            cinemaPlaces.set(i, false);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private static boolean searchReservation(Reservation reservation) {
 
         for (Reservation r : reservationList) {
 
@@ -58,7 +71,7 @@ public class Repository {
         return false;
     }
 
-    public void addToFavorites(Film film) {
+    public static void addToFavorites(Film film) {
 
         if (!searchInFavorites(film)) {
 
@@ -67,7 +80,7 @@ public class Repository {
 
     }
 
-    private boolean searchInFavorites(Film film) {
+    private static boolean searchInFavorites(Film film) {
 
         for (Film f : filmList) {
 
@@ -75,6 +88,33 @@ public class Repository {
                 return true;
         }
         return false;
+    }
+
+    public static HashMap<String, List<Time>> getHardcodedProgram() {
+        HashMap<String, List<Time>> dictionary = new HashMap<>();
+        List<Film> films = getHardcodedList();
+        List<List<Time>> posibilities= Arrays.asList(
+                Arrays.asList(new Time(10, 0,0), new Time(13, 30, 0), new Time(17,0,0), new Time(20, 30, 0)),
+                Arrays.asList(new Time(11, 0,0), new Time(14, 30, 0), new Time(18,0,0)),
+                Arrays.asList(new Time(12, 30,0), new Time(16, 0, 0), new Time(19,30,0)),
+                Arrays.asList(new Time(12, 0,0), new Time(17, 0, 0)),
+                Arrays.asList(new Time(10, 0,0), new Time(13, 30, 0), new Time(17,0,0)),
+                Arrays.asList(new Time(15, 0,0), new Time(20, 0, 0))
+        );
+
+        Random r = new Random();
+        for (Film f: films) {
+            dictionary.put(f.getTitle(), posibilities.get(r.nextInt(5)));
+        }
+        return dictionary;
+    }
+
+    public static List<Boolean> getCinemaPlaces() {
+        return cinemaPlaces;
+    }
+
+    public static List<Reservation> getReservationList() {
+        return reservationList;
     }
 }
 

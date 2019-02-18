@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.example.cinemaapp.R;
 
 public class MainActivity extends AppCompatActivity {
+    private Fragment selectedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
+            selectedFragment = null;
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:

@@ -1,37 +1,25 @@
 package com.example.cinemaapp.view;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.FilmAdapter;
-import com.example.cinemaapp.presenter.Repository;
-
-import java.util.Arrays;
-import java.util.List;
+import com.example.cinemaapp.repository.Repository;
 
 import android.widget.Button;
 
 public class HomeActivity extends Fragment {
 
     private Button button;
-    private Repository repository = new Repository();
+    //private Repository repository = new Repository();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +33,7 @@ public class HomeActivity extends Fragment {
         FilmAdapter adapter = new FilmAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        adapter.setFilmlist(repository.getHardcodedList());
+        adapter.setFilmlist(Repository.getHardcodedList());
 
         //Add spinner
         Spinner spinner = (Spinner) view.findViewById(R.id.filter_spinner);
@@ -57,14 +45,4 @@ public class HomeActivity extends Fragment {
         return view;
 
     }
-
-//    private void setHomeActivityHeight() {
-//
-//        FrameLayout containerLayout = getActivity().findViewById(R.id.fragment_container);
-//        ViewGroup.LayoutParams containerParams = containerLayout.getLayoutParams();
-//        ConstraintLayout homeLayout = containerLayout.findViewById(R.id.homepage);
-//        ViewGroup.LayoutParams homeParams = homeLayout.getLayoutParams();
-//        homeParams.height = containerParams.height;
-//        homeLayout.setLayoutParams(homeParams);
-//    }
 }
