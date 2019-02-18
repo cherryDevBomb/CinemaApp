@@ -1,7 +1,8 @@
 package com.example.cinemaapp.view;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,12 +19,24 @@ import com.example.cinemaapp.presenter.MakeReservationPresenter;
 
 public class MakeReservationActivity extends AppCompatActivity implements MakeReservationPresenter.MainView {
     private MakeReservationPresenter presenter;
+    private GridViewAdapter adapter;
 
     private SwipeButton swipeButton;
-    private SwipeButton.OnSwipeButtonExpandedListener swipeButtonExpandedListener = new SwipeButton.OnSwipeButtonExpandedListener() {
+    private SwipeButton.OnSwipeButtonListener swipeButtonExpandedListener = new SwipeButton.OnSwipeButtonListener() {
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onSwipeButtonExpanded(View v) {
             saveReservation();
+        }
+
+        @Override
+        public void onSwipeButtonMoved(View v) {
+            if (adapter.getSelectedPositions().size() > 0) {
+                swipeButton.setEnabled(true);
+            } else {
+                //swipeButton shouldnt expand
+                swipeButton.setEnabled(false);
+            }
         }
     };
 
@@ -47,7 +60,7 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         presenter.updateStartTime();
 
         GridView gridView = (GridView)findViewById(R.id.gridPlaces);
-        final GridViewAdapter adapter = new GridViewAdapter(this);
+        adapter = new GridViewAdapter(this);
         gridView.setAdapter(adapter);
 
         //Attach swipe listener to SwipeButton
@@ -74,8 +87,10 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         timeTextView.setText(time);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void saveReservation() {
+        presenter.setListPlaces(adapter.getSelectedPositions());
         presenter.createReservation();
 
         //return to Parent

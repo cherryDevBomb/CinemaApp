@@ -7,11 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.model.FilmAdapter;
-import com.example.cinemaapp.repository.Repository;
+import com.example.cinemaapp.model.FavoriteFilmAdapter;
 
 
 public class FavoritesActivity extends Fragment {
@@ -27,18 +25,8 @@ public class FavoritesActivity extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        final FilmAdapter adapter = new FilmAdapter(this);
+        final FavoriteFilmAdapter adapter = new FavoriteFilmAdapter(this);
         recyclerView.setAdapter(adapter);
-        adapter.setFilmlist(Repository.favoriteList);
-
-        Repository.setFavoriteListChangedListener(new Repository.FavoriteListChangedListener() {
-            @Override
-            public void onFavoriteListChanged() {
-                final FilmAdapter adapter = new FilmAdapter(pointerSaver);
-                recyclerView.setAdapter(adapter);
-                adapter.setFilmlist(Repository.favoriteList);
-            }
-        });
 
         return view;
     }

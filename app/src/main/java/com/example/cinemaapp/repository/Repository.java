@@ -1,5 +1,8 @@
 package com.example.cinemaapp.repository;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
@@ -12,12 +15,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Repository {
-
     static List<Film> filmList = new ArrayList<>();
     static List<Reservation> reservationList = new ArrayList<>();
     public static List<Film> favoriteList = new ArrayList<>();
     private static HashMap<String, List<Time>> dictionary;
-    public static FavoriteListChangedListener favoriteListChangedListener;
+    static List<Boolean> cinemaPlaces = Arrays.asList(true, true, true, true, true, true, true, true, true);
 
     public static List<Film> getHardcodedList() {
         List<Film> filmList = Arrays.asList(
@@ -43,16 +45,23 @@ public class Repository {
         return filmList;
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void addReservation(Reservation reservation) {
 
         if (!searchReservation(reservation)) {
 
             reservationList.add(reservation);
+            markReservedPlaces(reservation.getPlaces());
         }
-
     }
 
+    private static void markReservedPlaces(List<Integer> places) {
+        for (int i : places) {
+            cinemaPlaces.set(i, false);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private static boolean searchReservation(Reservation reservation) {
 
         for (Reservation r : reservationList) {
@@ -115,14 +124,13 @@ public class Repository {
         return dictionary;
     }
 
-
-    public interface FavoriteListChangedListener {
-
-        public void onFavoriteListChanged();
+    
+    public static List<Boolean> getCinemaPlaces() {
+        return cinemaPlaces;
     }
 
-    public static void setFavoriteListChangedListener(FavoriteListChangedListener favoriteListChangedListener) {
-        Repository.favoriteListChangedListener = favoriteListChangedListener;
+    public static List<Reservation> getReservationList() {
+        return reservationList;
     }
 }
 

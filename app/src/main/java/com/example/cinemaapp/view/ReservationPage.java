@@ -13,7 +13,9 @@ import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.model.ReservationAdapter;
+import com.example.cinemaapp.presenter.SwipeToDelete;
 import com.example.cinemaapp.presenter.SwipeController;
+import com.example.cinemaapp.repository.Repository;
 
 import java.io.Serializable;
 import java.sql.Time;
@@ -22,7 +24,7 @@ import java.util.List;
 
 public class ReservationPage extends Fragment implements Serializable {
 
-    SwipeController swipeController = new SwipeController();
+    //SwipeController swipeController = new SwipeController();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class ReservationPage extends Fragment implements Serializable {
 
         recyclerView.setAdapter(rAdapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDelete(rAdapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return view;
@@ -48,12 +50,13 @@ public class ReservationPage extends Fragment implements Serializable {
     private List<Reservation> testListReservation() {
 
 
-        Film film = new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian);
-        Time time = new Time(12, 0, 0);
-        List<Reservation> reservationList = Arrays.asList(new Reservation(film, time, "qrCode"), new Reservation(film, time, "qrCode"));
+//        Film film = new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian);
+//        Time time = new Time(12, 0, 0);
+//        List<Reservation> reservationList = Arrays.asList(new Reservation(film, time, null, "qrCode"), new Reservation(film, time, null, "qrCode"));
 
-        return reservationList;
+        return Repository.getReservationList();
     }
+
 }
 
 

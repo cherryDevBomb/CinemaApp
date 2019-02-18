@@ -28,27 +28,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
-    private List<Film> filmlist = new ArrayList<>();
+public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapter.FavoriteFilmHolder> {
+    private List<Film> filmlist = Repository.favoriteList;
     private Fragment contextGetter;
     private int mExpandedPosition = -1;
 
-    public FilmAdapter(Fragment contextGetter) {
+    public FavoriteFilmAdapter(Fragment contextGetter) {
         this.contextGetter = contextGetter;
     }
 
     @NonNull
     @Override
-    public FilmHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavoriteFilmHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.film_card, parent, false);
-        return new FilmHolder(itemView);
+        return new FavoriteFilmHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final FilmHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final FavoriteFilmHolder holder, final int position) {
         Film currentFilm = filmlist.get(position);
         holder.filmObject = currentFilm;
+        holder.position = position;
         holder.poster.setImageResource(currentFilm.getImagePath());
         holder.textViewTitle.setText(currentFilm.getTitle());
         holder.textViewGenre.setText(currentFilm.getGenre());
@@ -70,6 +71,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         else {
             holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
         }
+
 
         //expand card
         final boolean isExpanded = position==mExpandedPosition;
@@ -101,8 +103,9 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         this.filmlist = filmlist;
     }
 
-    class FilmHolder extends RecyclerView.ViewHolder {
+    class FavoriteFilmHolder extends RecyclerView.ViewHolder {
         private Film filmObject;
+        private int position;
 
         private ImageView poster;
         private TextView textViewTitle;
@@ -117,7 +120,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         private Button favorite;
 
 
-        public FilmHolder(final View itemView) {
+        public FavoriteFilmHolder(final View itemView) {
             super(itemView);
 
             poster = itemView.findViewById(R.id.film_poster);
@@ -159,11 +162,14 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
                         filmObject.setFavorite(true);
                         Repository.addToFavorites(filmObject);
+
                     }
                     else {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
                         filmObject.setFavorite(false);
-                        Repository.deleteFromFavorites(filmObject);
+                        filmlist.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, filmlist.size());
                     }
                 }
             });
