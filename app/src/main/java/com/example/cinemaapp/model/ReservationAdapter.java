@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cinemaapp.R;
+import com.example.cinemaapp.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +69,16 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     }
 
     public void removeReservation(int position) {
-
         reservationList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, reservationList.size());
+
+        //check if reservationList is empty and then show corresponding layout
+        if (Repository.getReservationList().isEmpty()) {
+            final TextView header = context.getView().findViewById(R.id.no_reservations_message_header);
+            header.setVisibility(View.VISIBLE);
+            final TextView body = context.getView().findViewById(R.id.no_reservations_message_body);
+            body.setVisibility(View.VISIBLE);
+        }
     }
 }
