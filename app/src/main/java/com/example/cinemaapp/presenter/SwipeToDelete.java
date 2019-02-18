@@ -13,6 +13,7 @@ import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.model.ReservationAdapter;
+import com.example.cinemaapp.repository.Repository;
 
 import java.sql.Time;
 import java.util.Arrays;
@@ -81,11 +82,12 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
     private List<Reservation> testListReservation() {
 
 
-        Film film = new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian);
-        Time time = new Time(12, 0, 0);
-        List<Reservation> reservationList = Arrays.asList(new Reservation(film, time, "qrCode"), new Reservation(film, time, "qrCode"));
-
-        return reservationList;
+//        Film film = new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian);
+//        Time time = new Time(12, 0, 0);
+//        List<Reservation> reservationList = Arrays.asList(new Reservation(film, time, null,  "qrCode"), new Reservation(film, time, null, "qrCode"));
+//
+//        return  reservationList;
+        return Repository.getReservationList();
     }
 
 }
