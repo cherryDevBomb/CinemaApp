@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.cinemaapp.controls.OnSwipeTouchListener;
 import com.example.cinemaapp.view.MainActivity;
@@ -16,12 +20,15 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
+        //Recognize Swipes
         View view = (View)findViewById(R.id.landing_layout);
         view.setOnTouchListener(new OnSwipeTouchListener(this) {
             public void onSwipeLeft() {
                 openActivity();
             }
         });
+
+        introAnimation();
     }
 
     public void openActivity() {
@@ -32,5 +39,31 @@ public class LandingActivity extends AppCompatActivity {
         this.finish();
     }
 
+    private void introAnimation() {
+        ImageView logoImg = (ImageView) findViewById(R.id.mainLogo);
 
+        RotateAnimation animation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
+                0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+        animation.setStartOffset(1000);
+        animation.setDuration(2000);
+        logoImg.setAnimation(animation);
+        logoImg.startAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                TextView swipeText = (TextView)findViewById(R.id.swipeSuggestionText);
+                swipeText.animate().alpha(1f).setDuration(1000);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
 }
