@@ -15,7 +15,9 @@ public class Repository {
 
     static List<Film> filmList = new ArrayList<>();
     static List<Reservation> reservationList = new ArrayList<>();
-    static List<Film> favoriteList = new ArrayList<>();
+    public static List<Film> favoriteList = new ArrayList<>();
+    private static HashMap<String, List<Time>> dictionary;
+    public static FavoriteListChangedListener favoriteListChangedListener;
 
     public static List<Film> getHardcodedList() {
         List<Film> filmList = Arrays.asList(
@@ -70,9 +72,9 @@ public class Repository {
 
     }
 
-    private static boolean searchInFavorites(Film film) {
+    public static boolean searchInFavorites(Film film) {
 
-        for (Film f : filmList) {
+        for (Film f : favoriteList) {
 
             if (f.equals(film))
                 return true;
@@ -80,24 +82,47 @@ public class Repository {
         return false;
     }
 
+    public static void deleteFromFavorites(Film film) {
+
+        for (Film f : favoriteList) {
+
+            if (f.equals(film)) {
+                favoriteList.remove(f);
+                return;
+            }
+        }
+    }
+
 
     public static HashMap<String, List<Time>> getHardcodedProgram() {
-        HashMap<String, List<Time>> dictionary = new HashMap<>();
-        List<Film> films = getHardcodedList();
-        List<List<Time>> posibilities= Arrays.asList(
-                Arrays.asList(new Time(10, 0,0), new Time(13, 30, 0), new Time(17,0,0), new Time(20, 30, 0)),
-                Arrays.asList(new Time(11, 0,0), new Time(14, 30, 0), new Time(18,0,0)),
-                Arrays.asList(new Time(12, 30,0), new Time(16, 0, 0), new Time(19,30,0)),
-                Arrays.asList(new Time(12, 0,0), new Time(17, 0, 0)),
-                Arrays.asList(new Time(10, 0,0), new Time(13, 30, 0), new Time(17,0,0)),
-                Arrays.asList(new Time(15, 0,0), new Time(20, 0, 0))
-        );
+        if (dictionary == null) {
+            dictionary = new HashMap<>();
+            List<Film> films = getHardcodedList();
+            List<List<Time>> posibilities = Arrays.asList(
+                    Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0), new Time(20, 30, 0)),
+                    Arrays.asList(new Time(11, 0, 0), new Time(14, 30, 0), new Time(18, 0, 0)),
+                    Arrays.asList(new Time(12, 30, 0), new Time(16, 0, 0), new Time(19, 30, 0)),
+                    Arrays.asList(new Time(12, 0, 0), new Time(17, 0, 0)),
+                    Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0)),
+                    Arrays.asList(new Time(15, 0, 0), new Time(20, 0, 0))
+            );
 
-        Random r = new Random();
-        for (Film f: films) {
-            dictionary.put(f.getTitle(), posibilities.get(r.nextInt(5)));
+            Random r = new Random();
+            for (Film f : films) {
+                dictionary.put(f.getTitle(), posibilities.get(r.nextInt(5)));
+            }
         }
         return dictionary;
+    }
+
+
+    public interface FavoriteListChangedListener {
+
+        public void onFavoriteListChanged();
+    }
+
+    public static void setFavoriteListChangedListener(FavoriteListChangedListener favoriteListChangedListener) {
+        Repository.favoriteListChangedListener = favoriteListChangedListener;
     }
 }
 

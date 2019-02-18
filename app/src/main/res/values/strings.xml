@@ -11,8 +11,12 @@
         <item>All</item>
         <item>Drama</item>
         <item>Adventure</item>
-        <item>Thriller</item>
+        <item>Animation</item>
+        <item>Horror</item>
         <item>Comedy</item>
+        <item>Romance</item>
+        <item>Documentary</item>
+
     </string-array>
 
 </resources>

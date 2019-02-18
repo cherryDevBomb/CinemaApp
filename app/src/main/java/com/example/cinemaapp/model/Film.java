@@ -1,6 +1,7 @@
 package com.example.cinemaapp.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Film implements Serializable {
 
@@ -66,5 +67,18 @@ public class Film implements Serializable {
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return Objects.equals(title, film.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
     }
 }

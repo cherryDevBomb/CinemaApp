@@ -8,12 +8,12 @@ import java.util.List;
 
 public class Presenter {
 
-    private Repository repository = new Repository();
-
-    List<Film> filmList = repository.getHardcodedList();
+    List<Film> filmList = Repository.getHardcodedList();
 
 
     public List<Film> filterByGenre(String genre){
+        if (genre.equals("All"))
+            return filmList;
 
         List<Film> filteredFilmList = new ArrayList<>();
 

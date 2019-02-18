@@ -41,9 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_reservation:
                     selectedFragment = new ReservationPage();
                     break;
-                case R.id.navigation_notifications:
-                    selectedFragment = new HomeActivity();
-                    System.out.println("mergeNot");
+                case R.id.navigation_favorites:
+                    selectedFragment = new FavoritesActivity();
                     break;
             }
 

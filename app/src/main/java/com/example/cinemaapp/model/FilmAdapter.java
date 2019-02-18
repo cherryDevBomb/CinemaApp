@@ -26,7 +26,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
@@ -62,6 +61,14 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                 DateFormat df= new SimpleDateFormat("HH:mm");
                 holder.buttons.get(i).setText(df.format(date));
                 holder.buttons.get(i).setVisibility(View.VISIBLE);
+        }
+
+        boolean isFavorite = Repository.searchInFavorites(currentFilm);
+        if (isFavorite) {
+            holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
+        }
+        else {
+            holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
         }
 
         //expand card
@@ -147,20 +154,19 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean isFavorite = filmObject.isFavorite();
+                    boolean isFavorite = Repository.searchInFavorites(filmObject);
                     if (!isFavorite) {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
                         filmObject.setFavorite(true);
-                        //add to favorites in repo
+                        Repository.addToFavorites(filmObject);
                     }
                     else {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
                         filmObject.setFavorite(false);
-                        //delete from favorites in repo
+                        Repository.deleteFromFavorites(filmObject);
                     }
                 }
             });
-
         }
 
         private void openPage(Film film, String time) {
