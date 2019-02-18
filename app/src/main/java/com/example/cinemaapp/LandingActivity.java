@@ -1,11 +1,13 @@
 package com.example.cinemaapp;
 
+import android.animation.AnimatorSet;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,7 +47,7 @@ public class LandingActivity extends AppCompatActivity {
         RotateAnimation animation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
                 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
-        animation.setStartOffset(1000);
+        animation.setStartOffset(500);
         animation.setDuration(2000);
         logoImg.setAnimation(animation);
         logoImg.startAnimation(animation);
@@ -58,6 +60,9 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 TextView swipeText = (TextView)findViewById(R.id.swipeSuggestionText);
+
+                //Slide TextView and set opacity to 100
+                swipeText.startAnimation(AnimationUtils.loadAnimation(LandingActivity.this, R.anim.right_to_left_swipe));
                 swipeText.animate().alpha(1f).setDuration(1000);
             }
 
