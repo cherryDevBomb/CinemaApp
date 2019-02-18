@@ -8,6 +8,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
@@ -43,6 +44,13 @@ public class ReservationPage extends Fragment implements Serializable {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDelete(rAdapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        if (Repository.getReservationList().isEmpty()) {
+            final TextView header = view.findViewById(R.id.no_reservations_message_header);
+            header.setVisibility(View.VISIBLE);
+            final TextView body = view.findViewById(R.id.no_reservations_message_body);
+            body.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

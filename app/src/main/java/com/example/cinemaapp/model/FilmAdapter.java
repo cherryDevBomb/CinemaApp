@@ -59,8 +59,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
 
         HashMap<Time, List<Boolean>> thisFilmProgram = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         List<Time> times = new ArrayList<Time>(thisFilmProgram.keySet());
-
-        //List<Time> times = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         for (int i = 0; i < times.size(); i++) {
             Date date=new Date(times.get(i).getTime());
             DateFormat df= new SimpleDateFormat("HH:mm");
@@ -79,17 +77,13 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         //expand card
         final boolean isExpanded = position==mExpandedPosition;
         holder.detailsOnExpand.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        int expandedIconId = isExpanded ? R.drawable.ic_keyboard_arrow_up_black_24dp : R.drawable.ic_keyboard_arrow_down_black_24dp;
+        holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,expandedIconId,0);
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
-                if (!isExpanded) {
-                    holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_up_black_24dp, 0);
-                }
-                else {
-                    holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_down_black_24dp, 0);
-                }
                 mExpandedPosition = isExpanded ? -1:position;
                 TransitionManager.beginDelayedTransition(holder.detailsOnExpand);
                 notifyDataSetChanged();

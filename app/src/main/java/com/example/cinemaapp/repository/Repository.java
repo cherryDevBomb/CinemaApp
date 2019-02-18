@@ -25,9 +25,9 @@ public class Repository {
 
     public static List<Film> getHardcodedList() {
         List<Film> filmList = Arrays.asList(
-                new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
-                new Film("La La Land", "Drama", "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future. ", 8.0, R.drawable.lalaland),
                 new Film("Despicable Me", "Animation", "When a criminal mastermind uses a trio of orphan girls as pawns for a grand scheme, he finds their love is profoundly changing him for the better. ", 7.7, R.drawable.despicable),
+                new Film("La La Land", "Drama", "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future. ", 8.0, R.drawable.lalaland),
+                new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian),
                 new Film("The Great Gatsby", "Drama", "A writer and wall street trader, Nick, finds himself drawn to the past and lifestyle of his millionaire neighbor, Jay Gatsby. ", 7.3, R.drawable.gatsby),
                 new Film("Ted", "Comedy", "John Bennett, a man whose childhood wish of bringing his teddy bear to life came true, now must decide between keeping the relationship with the bear or his girlfriend, Lori. ", 6.9, R.drawable.ted),
                 new Film("Ralph Breaks The Internet", "Animation", "Six years after the events of \"Wreck-It Ralph,\" Ralph and Vanellope, now friends, discover a wi-fi router in their arcade, leading them into a new adventure. ", 7.2, R.drawable.ralph),

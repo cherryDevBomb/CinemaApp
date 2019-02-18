@@ -18,4 +18,34 @@
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         />
 
+    <TextView
+        android:id="@+id/no_favorites_message_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        android:drawableTop="@drawable/ic_favorite_black_100dp"
+        android:text="@string/no_favorites_msg_header"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/no_favorites_message_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/no_favorites_message_header"
+        android:layout_marginTop="16dp"
+        android:text="@string/no_favorites_msg_body"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="invisible"
+        />
+
 </android.support.constraint.ConstraintLayout>
