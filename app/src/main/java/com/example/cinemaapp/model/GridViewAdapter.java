@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.presenter.MakeReservationPresenter;
 import com.example.cinemaapp.repository.Repository;
 
 import java.util.ArrayList;
@@ -21,13 +20,11 @@ public class GridViewAdapter extends BaseAdapter {
     private List<Integer> listOfPlaces;
     private List<Integer> selectedPositions;
     private Context mContext;
-    private MakeReservationPresenter presenter;
 
-    public GridViewAdapter(Context mContext, MakeReservationPresenter presenter) {
+    public GridViewAdapter(Context mContext) {
         this.listOfPlaces = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         this.mContext = mContext;
         this.selectedPositions = new ArrayList<>();
-        this.presenter = presenter;
     }
 
     @Override
@@ -63,17 +60,15 @@ public class GridViewAdapter extends BaseAdapter {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int pos = Integer.parseInt(((Button) view).getText().toString());
+                    int pos = Integer.parseInt(((Button) view).getText().toString()) - 1;
 
                     //allow multiple select
                     int selectedIndex = selectedPositions.indexOf(pos);
                     if (Repository.getCinemaPlaces().get(pos) && selectedIndex > -1) {
                         selectedPositions.remove(selectedIndex);
-                        presenter.setListPlaces(selectedPositions);
                         ((Button) view).setBackgroundColor(Color.rgb(53, 172, 72));
                     } else if (Repository.getCinemaPlaces().get(pos) && selectedIndex == -1){
                         selectedPositions.add(pos);
-                        presenter.setListPlaces(selectedPositions);
                         ((Button) view).setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.titleColor));
                     }
                 }
@@ -83,5 +78,9 @@ public class GridViewAdapter extends BaseAdapter {
         }
 
         return button;
+    }
+
+    public List<Integer> getSelectedPositions() {
+        return selectedPositions;
     }
 }
