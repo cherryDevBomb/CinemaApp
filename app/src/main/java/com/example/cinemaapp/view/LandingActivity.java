@@ -1,10 +1,8 @@
-package com.example.cinemaapp;
+package com.example.cinemaapp.view;
 
-import android.animation.AnimatorSet;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,8 +10,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cinemaapp.R;
 import com.example.cinemaapp.controls.OnSwipeTouchListener;
-import com.example.cinemaapp.view.MainActivity;
 
 public class LandingActivity extends AppCompatActivity {
 
