@@ -18,7 +18,7 @@ public class Repository {
     static List<Film> filmList = new ArrayList<>();
     static List<Reservation> reservationList = new ArrayList<>();
     public static List<Film> favoriteList = new ArrayList<>();
-    private static HashMap<String, List<Time>> dictionary;
+    private static HashMap<String, HashMap<Time, List<Boolean>>> program;
     static List<Boolean> cinemaPlaces = Arrays.asList(true, true, true, true, true, true, true, true, true);
 
     public static List<Film> getHardcodedList() {
@@ -103,9 +103,9 @@ public class Repository {
     }
 
 
-    public static HashMap<String, List<Time>> getHardcodedProgram() {
-        if (dictionary == null) {
-            dictionary = new HashMap<>();
+    public static HashMap<String, HashMap<Time, List<Boolean>>> getHardcodedProgram() {
+        if (program == null) {
+            program = new HashMap<>();
             List<Film> films = getHardcodedList();
             List<List<Time>> posibilities = Arrays.asList(
                     Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0), new Time(20, 30, 0)),
@@ -118,10 +118,15 @@ public class Repository {
 
             Random r = new Random();
             for (Film f : films) {
-                dictionary.put(f.getTitle(), posibilities.get(r.nextInt(5)));
+                List<Time> thisFilmTimes = posibilities.get(r.nextInt(5));
+                HashMap<Time, List<Boolean>> thisFilmProgram = new HashMap<>();
+                for (Time t : thisFilmTimes) {
+                    thisFilmProgram.put(t, Arrays.asList(true, true, true, true, true, true, true, true, true));
+                }
+                program.put(f.getTitle(), thisFilmProgram);
             }
         }
-        return dictionary;
+        return program;
     }
 
     

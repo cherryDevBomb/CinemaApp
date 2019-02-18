@@ -26,7 +26,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     private List<Film> filmlist = new ArrayList<>();
@@ -55,7 +57,10 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         holder.textViewRating.setText("  " + String.valueOf(currentFilm.getRating()));
         holder.textViewDescription.setText(currentFilm.getDescription());
 
-        List<Time> times = Repository.getHardcodedProgram().get(currentFilm.getTitle());
+        HashMap<Time, List<Boolean>> thisFilmProgram = Repository.getHardcodedProgram().get(currentFilm.getTitle());
+        List<Time> times = new ArrayList<Time>(thisFilmProgram.keySet());
+
+        //List<Time> times = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         for (int i = 0; i < times.size(); i++) {
             Date date=new Date(times.get(i).getTime());
             DateFormat df= new SimpleDateFormat("HH:mm");
