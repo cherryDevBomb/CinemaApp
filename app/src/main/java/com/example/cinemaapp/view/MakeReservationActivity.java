@@ -28,6 +28,8 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         @Override
         public void onSwipeButtonExpanded(View v) {
             saveReservation();
+            //don't allow to return to this activity
+            MakeReservationActivity.this.finish();
         }
 
         @Override
