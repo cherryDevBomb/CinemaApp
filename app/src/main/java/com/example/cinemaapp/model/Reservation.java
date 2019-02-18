@@ -1,5 +1,6 @@
 package com.example.cinemaapp.model;
 
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
@@ -12,11 +13,11 @@ public class Reservation implements Serializable {
     private Film film;
     private Time startTime;
     private List<Integer> places;
-    private String codeQR;
+    private Bitmap codeQR;
 
     public Reservation(){}
 
-    public Reservation(Film film, Time startTime, List<Integer> places, String codeQR) {
+    public Reservation(Film film, Time startTime, List<Integer> places, Bitmap codeQR) {
         this.film = film;
         this.startTime = startTime;
         this.places = places;
@@ -39,11 +40,11 @@ public class Reservation implements Serializable {
         this.startTime = startTime;
     }
 
-    public String getCodeQR() {
+    public Bitmap getCodeQR() {
         return codeQR;
     }
 
-    public void setCodeQR(String codeQR) {
+    public void setCodeQR(Bitmap codeQR) {
         this.codeQR = codeQR;
     }
 
