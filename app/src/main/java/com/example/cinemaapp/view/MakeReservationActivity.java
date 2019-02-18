@@ -47,7 +47,7 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         presenter.updateStartTime();
 
         GridView gridView = (GridView)findViewById(R.id.gridPlaces);
-        final GridViewAdapter adapter = new GridViewAdapter(this);
+        final GridViewAdapter adapter = new GridViewAdapter(this, presenter);
         gridView.setAdapter(adapter);
 
         //Attach swipe listener to SwipeButton
