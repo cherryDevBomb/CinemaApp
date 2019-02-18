@@ -7,9 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.FavoriteFilmAdapter;
+import com.example.cinemaapp.repository.Repository;
 
 
 public class FavoritesActivity extends Fragment {
@@ -27,6 +29,14 @@ public class FavoritesActivity extends Fragment {
 
         final FavoriteFilmAdapter adapter = new FavoriteFilmAdapter(this);
         recyclerView.setAdapter(adapter);
+
+
+        if (Repository.favoriteList.isEmpty()) {
+            final TextView header = view.findViewById(R.id.no_favorites_message_header);
+            header.setVisibility(View.VISIBLE);
+            final TextView body = view.findViewById(R.id.no_favorites_message_body);
+            body.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

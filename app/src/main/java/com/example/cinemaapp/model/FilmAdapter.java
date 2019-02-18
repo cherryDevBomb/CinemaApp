@@ -59,8 +59,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
 
         HashMap<Time, List<Boolean>> thisFilmProgram = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         List<Time> times = new ArrayList<Time>(thisFilmProgram.keySet());
-
-        //List<Time> times = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         for (int i = 0; i < times.size(); i++) {
             Date date=new Date(times.get(i).getTime());
             DateFormat df= new SimpleDateFormat("HH:mm");
