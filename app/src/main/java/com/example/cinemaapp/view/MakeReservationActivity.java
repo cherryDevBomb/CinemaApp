@@ -3,7 +3,6 @@ package com.example.cinemaapp.view;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,11 +22,21 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
     private GridViewAdapter adapter;
 
     private SwipeButton swipeButton;
-    private SwipeButton.OnSwipeButtonExpandedListener swipeButtonExpandedListener = new SwipeButton.OnSwipeButtonExpandedListener() {
+    private SwipeButton.OnSwipeButtonListener swipeButtonExpandedListener = new SwipeButton.OnSwipeButtonListener() {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onSwipeButtonExpanded(View v) {
             saveReservation();
+        }
+
+        @Override
+        public void onSwipeButtonMoved(View v) {
+            if (adapter.getSelectedPositions().size() > 0) {
+                swipeButton.setEnabled(true);
+            } else {
+                //swipeButton shouldnt expand
+                swipeButton.setEnabled(false);
+            }
         }
     };
 

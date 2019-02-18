@@ -7,7 +7,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -28,13 +27,14 @@ import com.example.cinemaapp.R;
  * Custom view for Sliding Button (Confirm reservation)
  */
 public class SwipeButton extends RelativeLayout {
-    private OnSwipeButtonExpandedListener listener;
+    private OnSwipeButtonListener listener;
 
-    public interface OnSwipeButtonExpandedListener {
+    public interface OnSwipeButtonListener {
         void onSwipeButtonExpanded(View v);
+        void onSwipeButtonMoved(View v);
     }
 
-    public void setSwipeListener(OnSwipeButtonExpandedListener listener) {
+    public void setSwipeListener(OnSwipeButtonListener listener) {
         this.listener = listener;
     }
 
@@ -46,6 +46,8 @@ public class SwipeButton extends RelativeLayout {
 
     private Drawable disabledDrawable;
     private Drawable enabledDrawable;
+
+    private boolean enabled;
 
     public SwipeButton(Context context) {
         super(context);
@@ -121,6 +123,10 @@ public class SwipeButton extends RelativeLayout {
         setOnTouchListener(getButtonTouchListener());
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     private OnTouchListener getButtonTouchListener() {
         return new OnTouchListener() {
             @Override
@@ -148,6 +154,9 @@ public class SwipeButton extends RelativeLayout {
                             slidingButton.setX(0);
                         }
 
+                        if (listener != null)
+                            listener.onSwipeButtonMoved(SwipeButton.this);
+
                         return true;
                     case MotionEvent.ACTION_UP:
                         if (active) {
@@ -155,7 +164,7 @@ public class SwipeButton extends RelativeLayout {
                         } else {
                             initialButtonWidth = slidingButton.getWidth();
 
-                            if (slidingButton.getX() + slidingButton.getWidth() > getWidth() * 0.85) {
+                            if ((slidingButton.getX() + slidingButton.getWidth() > getWidth() * 0.85) && enabled) {
                                 expandButton();
                             } else {
                                 moveButtonBack();
