@@ -13,7 +13,7 @@ import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.model.ReservationAdapter;
-import com.example.cinemaapp.presenter.SwipeController;
+import com.example.cinemaapp.presenter.SwipeToDelete;
 
 import java.sql.Time;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ReservationPage extends Fragment {
 
-    SwipeController swipeController = new SwipeController();
+    //SwipeController swipeController = new SwipeController();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class ReservationPage extends Fragment {
 
         recyclerView.setAdapter(rAdapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDelete(rAdapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return view;
@@ -53,6 +53,7 @@ public class ReservationPage extends Fragment {
 
         return reservationList;
     }
+
 }
 
 

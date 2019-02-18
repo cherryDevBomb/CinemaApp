@@ -27,6 +27,10 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         this.reservationList = reservationList;
     }
 
+    public Fragment getContext() {
+        return context;
+    }
+
     class ReservationHolder extends RecyclerView.ViewHolder {
 
         TextView textTitle;
