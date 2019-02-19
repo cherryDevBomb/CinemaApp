@@ -64,9 +64,8 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             popup = new Dialog(Objects.requireNonNull(context.getActivity()));
             popup.setContentView(R.layout.popup_activity);
 
-            reservedSeats = itemView.findViewById(R.id.reserved_seats);
-            qrCode = itemView.findViewById(R.id.qr_code);
-
+            reservedSeats = popup.findViewById(R.id.reserved_seats);
+            qrCode = popup.findViewById(R.id.qr_code);
 
             Button popupButton = itemView.findViewById(R.id.detail_button);
             popupButton.setOnClickListener(new View.OnClickListener() {
@@ -74,10 +73,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onClick(View v) {
-
-                    sendInformation(reservationObject);
-                    openPopup();
-
                     reservedSeats.setText(getSeatsAsString(reservationObject.getPlaces()));
                     qrCode.setImageBitmap(reservationObject.getCodeQR());
                     openPopup();
@@ -94,7 +89,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     popup.dismiss();
                 }
             });
@@ -121,15 +115,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         }
     }
 
-
-    private void sendInformation(Reservation currentReservation) {
-
-        Intent intent = new Intent(context.getActivity(), ReservationHolder.class);
-        intent.putExtra("currentReservation", currentReservation);
-        context.startActivity(intent);
-    }
-
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     @Override
@@ -150,7 +135,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
         Time time = reservationHolder.reservationObject.getStartTime();
         Date date = new Date(time.getTime());
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        DateFormat dateFormat = new SimpleDateFormat("kk:mm");
         reservationHolder.textStartingTime.setText(dateFormat.format(date));
     }
 
@@ -184,6 +169,4 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             body.setVisibility(View.VISIBLE);
         }
     }
-
-
 }

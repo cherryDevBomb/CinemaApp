@@ -48,13 +48,14 @@ public class MakeReservationActivity extends AppCompatActivity implements MakeRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
 
-        getSupportActionBar().setTitle("Reserve");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         //retrieve values from Intent
         Intent creatorIntent = getIntent();
         Film film = (Film)creatorIntent.getSerializableExtra("film");
         String time = creatorIntent.getStringExtra("time");
+
+        getSupportActionBar().setTitle("Reserve");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         //create the presenter and update the with the new film information on View
         presenter = new MakeReservationPresenter(this, film, time);

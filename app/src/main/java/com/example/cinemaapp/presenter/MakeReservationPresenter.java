@@ -52,7 +52,7 @@ public class MakeReservationPresenter {
     public void createReservation() {
         //create object time from string
         Time timeObj = null;
-        DateFormat formatter= new SimpleDateFormat("hh:mm");
+        DateFormat formatter= new SimpleDateFormat("kk:mm");
         try {
              timeObj = new Time(formatter.parse(time).getTime());
         } catch (Exception e) {

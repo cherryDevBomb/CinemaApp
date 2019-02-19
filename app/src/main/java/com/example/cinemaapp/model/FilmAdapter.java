@@ -60,7 +60,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         List<Time> times = new ArrayList<Time>(thisFilmProgram.keySet());
         for (int i = 0; i < times.size(); i++) {
             Date date = new Date(times.get(i).getTime());
-            DateFormat df = new SimpleDateFormat("HH:mm");
+            DateFormat df = new SimpleDateFormat("kk:mm");
             holder.buttons.get(i).setText(df.format(date));
             holder.buttons.get(i).setVisibility(View.VISIBLE);
         }

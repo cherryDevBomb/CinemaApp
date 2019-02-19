@@ -140,7 +140,7 @@ public class Repository {
     public static List<Boolean> getCinemaPlaces(String filmTitle, String time) {
         //transform time from string to Time obj
         Time timeObj = null;
-        DateFormat formatter= new SimpleDateFormat("hh:mm");
+        DateFormat formatter = new SimpleDateFormat("kk:mm");
         try {
             timeObj = new Time(formatter.parse(time).getTime());
         } catch (Exception e) {
