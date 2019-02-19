@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="400dp"
+    android:padding="5dp"
+    android:layout_gravity="center"
+    android:background="@color/popUpColor"
+
+    >
+
+    <ImageView
+        android:id="@+id/close_popup"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginLeft="300dp"
+        android:src="@drawable/ic_exit_to_app_black_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/qr_code"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/qrcode" />
+
+    <TextView
+        android:id="@+id/scan_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:text="Scan this at the entrance!"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        />
+
+    <ImageView
+        android:id="@+id/seats"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/seats"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
+        />
+
+    <TextView
+        android:id="@+id/reserved_seats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:text="Seats"
+        android:textColor="@color/colorPrimary"
+        android:textSize="17sp"
+        />
+
+</LinearLayout>

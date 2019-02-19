@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
     <color name="titleColor">#F5821E</color>
+    <color name="popUpColor">#66F5821E</color>
 </resources>
