@@ -1,6 +1,7 @@
 package com.example.cinemaapp.model;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -53,10 +54,12 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             super(itemView);
             textTitle = itemView.findViewById(R.id.film_title_text);
             textStartingTime = itemView.findViewById(R.id.starting_time_text);
-            reservedSeats = itemView.findViewById(R.id.reserved_seats);
-            qrCode = itemView.findViewById(R.id.qr_code);
 
             popup = new Dialog(Objects.requireNonNull(context.getActivity()));
+            popup.setContentView(R.layout.popup_activity);
+
+            reservedSeats = itemView.findViewById(R.id.reserved_seats);
+            qrCode = itemView.findViewById(R.id.qr_code);
 
             Button popupButton = itemView.findViewById(R.id.detail_button);
             popupButton.setOnClickListener(new View.OnClickListener(){
@@ -65,7 +68,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
                 @Override
                 public void onClick(View v) {
 
-                    //sendInformation(reservationObject);
+                    sendInformation(reservationObject);
                     openPopup();
                     reservedSeats.setText(reservationObject.getPlaces().toString());
                     qrCode.setImageBitmap(reservationObject.getCodeQR());
@@ -74,12 +77,12 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         }
     }
 
-//    private void sendInformation(Reservation currentReservation){
-//
-//        Intent intent = new Intent(context.getActivity(), ReservationHolder.class);
-//        intent.putExtra("currentReservation", currentReservation);
-//        context.startActivity(intent);
-//    }
+    private void sendInformation(Reservation currentReservation){
+
+        Intent intent = new Intent(context.getActivity(), ReservationHolder.class);
+        intent.putExtra("currentReservation", currentReservation);
+        context.startActivity(intent);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void openPopup(){

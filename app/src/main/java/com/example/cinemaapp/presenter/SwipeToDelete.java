@@ -23,9 +23,8 @@ import java.util.Objects;
 public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
 
     private ReservationAdapter rAdapter;
-    private final ColorDrawable background;
-
-    Drawable icon;
+    private ColorDrawable background;
+    private Drawable icon;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public SwipeToDelete(ReservationAdapter adapter){
@@ -36,9 +35,8 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
         rAdapter.setReservationList(testListReservation());
 
         icon = ContextCompat.getDrawable(Objects.requireNonNull(rAdapter.getContext().getActivity()), R.drawable.ic_delete_sweep_black_24dp);
-        assert icon != null;
 
-        background = new ColorDrawable(Color.RED);
+        background = new ColorDrawable(Color.rgb(255, 99, 71));
     }
 
     @Override
