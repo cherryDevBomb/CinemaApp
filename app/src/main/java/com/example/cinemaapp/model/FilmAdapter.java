@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     private List<Film> filmlist = new ArrayList<>();
@@ -60,8 +59,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         HashMap<Time, List<Boolean>> thisFilmProgram = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         List<Time> times = new ArrayList<Time>(thisFilmProgram.keySet());
         for (int i = 0; i < times.size(); i++) {
-            Date date=new Date(times.get(i).getTime());
-            DateFormat df= new SimpleDateFormat("HH:mm");
+            Date date = new Date(times.get(i).getTime());
+            DateFormat df = new SimpleDateFormat("HH:mm");
             holder.buttons.get(i).setText(df.format(date));
             holder.buttons.get(i).setVisibility(View.VISIBLE);
         }
@@ -69,22 +68,21 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         boolean isFavorite = Repository.searchInFavorites(currentFilm);
         if (isFavorite) {
             holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
-        }
-        else {
+        } else {
             holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
         }
 
         //expand card
-        final boolean isExpanded = position==mExpandedPosition;
-        holder.detailsOnExpand.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        final boolean isExpanded = position == mExpandedPosition;
+        holder.detailsOnExpand.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         int expandedIconId = isExpanded ? R.drawable.ic_keyboard_arrow_up_black_24dp : R.drawable.ic_keyboard_arrow_down_black_24dp;
-        holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,expandedIconId,0);
+        holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, expandedIconId, 0);
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
-                mExpandedPosition = isExpanded ? -1:position;
+                mExpandedPosition = isExpanded ? -1 : position;
                 TransitionManager.beginDelayedTransition(holder.detailsOnExpand);
                 notifyDataSetChanged();
             }
@@ -158,8 +156,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
                         filmObject.setFavorite(true);
                         Repository.addToFavorites(filmObject);
-                    }
-                    else {
+                    } else {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
                         filmObject.setFavorite(false);
                         Repository.deleteFromFavorites(filmObject);

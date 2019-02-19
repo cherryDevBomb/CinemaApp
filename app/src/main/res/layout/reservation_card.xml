@@ -43,8 +43,8 @@
             android:id="@+id/clock_img"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginStart="220dp"
-            android:layout_marginLeft="220dp"
+            android:layout_marginStart="210dp"
+            android:layout_marginLeft="210dp"
             android:layout_below="@id/film_title_text"
             android:src="@drawable/ic_access_time_black_24dp" />
 

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.model.ReservationAdapter;
-import com.example.cinemaapp.presenter.SwipeToDelete;
+import com.example.cinemaapp.controls.SwipeToDelete;
 import com.example.cinemaapp.repository.Repository;
 
 import java.io.Serializable;

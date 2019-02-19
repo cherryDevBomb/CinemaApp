@@ -1,4 +1,4 @@
-package com.example.cinemaapp.presenter;
+package com.example.cinemaapp.controls;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

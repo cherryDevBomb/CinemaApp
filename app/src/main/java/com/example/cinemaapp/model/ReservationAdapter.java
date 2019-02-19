@@ -1,5 +1,6 @@
 package com.example.cinemaapp.model;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
@@ -17,7 +18,12 @@ import android.widget.TextView;
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.repository.Repository;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,8 +67,9 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             reservedSeats = itemView.findViewById(R.id.reserved_seats);
             qrCode = itemView.findViewById(R.id.qr_code);
 
+
             Button popupButton = itemView.findViewById(R.id.detail_button);
-            popupButton.setOnClickListener(new View.OnClickListener(){
+            popupButton.setOnClickListener(new View.OnClickListener() {
 
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
@@ -70,7 +77,8 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
                     sendInformation(reservationObject);
                     openPopup();
-                    reservedSeats.setText(reservationObject.getPlaces().toString());
+
+                    reservedSeats.setText(getSeatsAsString(reservationObject.getPlaces()));
                     qrCode.setImageBitmap(reservationObject.getCodeQR());
                     openPopup();
                 }
@@ -78,8 +86,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         }
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-        private void openPopup(){
-
+        private void openPopup() {
 
             popup.show();
 
@@ -92,9 +99,30 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
                 }
             });
         }
+
+        public String getSeatsAsString(List<Integer> seatList) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            Iterator<Integer> iterator = seatList.iterator();
+
+            while (iterator.hasNext()) {
+
+                //to print correct number
+                int seatPlusOne = iterator.next() + 1;
+
+                stringBuilder.append(seatPlusOne);
+                if (iterator.hasNext()) {
+
+                    stringBuilder.append(", ");
+                }
+            }
+
+            return stringBuilder.toString();
+        }
     }
 
-    private void sendInformation(Reservation currentReservation){
+
+    private void sendInformation(Reservation currentReservation) {
 
         Intent intent = new Intent(context.getActivity(), ReservationHolder.class);
         intent.putExtra("currentReservation", currentReservation);
@@ -119,7 +147,11 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         reservationHolder.reservationObject = reservationList.get(position);
 
         reservationHolder.textTitle.setText(reservationHolder.reservationObject.getFilm().getTitle());
-        reservationHolder.textStartingTime.setText(reservationHolder.reservationObject.getStartTime().toString());
+
+        Time time = reservationHolder.reservationObject.getStartTime();
+        Date date = new Date(time.getTime());
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        reservationHolder.textStartingTime.setText(dateFormat.format(date));
     }
 
     @Override
@@ -128,6 +160,18 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     }
 
     public void removeReservation(int position) {
+
+        //the seats reserved on this reservation will be marked as free
+        List<Integer> placesOnThisReservation = reservationList.get(position).getPlaces();
+        Film filmOnThisReservation = reservationList.get(position).getFilm();
+        Time timeOnThisReservation = reservationList.get(position).getStartTime();
+        List<Boolean> currentCinemaPlaces = Repository.getCinemaPlaces(filmOnThisReservation.getTitle(), timeOnThisReservation.toString());
+
+        for (int i : placesOnThisReservation) {
+
+            currentCinemaPlaces.set(i, true);
+        }
+
         reservationList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, reservationList.size());
