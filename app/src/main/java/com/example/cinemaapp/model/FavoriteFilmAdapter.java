@@ -172,6 +172,13 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
                         filmlist.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, filmlist.size());
+
+                        if (Repository.favoriteList.isEmpty()) {
+                            final TextView header = contextGetter.getView().findViewById(R.id.no_favorites_message_header);
+                            header.setVisibility(View.VISIBLE);
+                            final TextView body = contextGetter.getView().findViewById(R.id.no_favorites_message_body);
+                            body.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });

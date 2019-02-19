@@ -4,20 +4,21 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.model.ReservationAdapter;
 import com.example.cinemaapp.repository.Repository;
 
-import java.sql.Time;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
 
@@ -26,6 +27,7 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
 
     Drawable icon;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public SwipeToDelete(ReservationAdapter adapter){
 
         super(0, ItemTouchHelper.LEFT);
@@ -33,7 +35,8 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
         this.rAdapter = adapter;
         rAdapter.setReservationList(testListReservation());
 
-        //icon = ContextCompat.getDrawable(rAdapter.getContext(), R.drawable.ic_delete_black_24dp);
+        icon = ContextCompat.getDrawable(Objects.requireNonNull(rAdapter.getContext().getActivity()), R.drawable.ic_delete_sweep_black_24dp);
+        assert icon != null;
 
         background = new ColorDrawable(Color.RED);
     }
@@ -65,7 +68,16 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
         //push background behind the edge of the parent
         int backgroundCornerOffset = 20;
 
+        int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+        int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+        int iconBottom = iconTop + icon.getIntrinsicHeight();
+
+
         if (dX < 0){
+
+            int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
+            int iconRight = itemView.getRight() - iconMargin;
+            icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
 
             background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
                     itemView.getTop(), itemView.getRight(), itemView.getBottom());
@@ -76,17 +88,12 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
         }
 
         background.draw(c);
+        icon.draw(c);
     }
 
 
     private List<Reservation> testListReservation() {
 
-
-//        Film film = new Film("The Martian", "Adventure", "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive. ", 8.0, R.drawable.martian);
-//        Time time = new Time(12, 0, 0);
-//        List<Reservation> reservationList = Arrays.asList(new Reservation(film, time, null,  "qrCode"), new Reservation(film, time, null, "qrCode"));
-//
-//        return  reservationList;
         return Repository.getReservationList();
     }
 
