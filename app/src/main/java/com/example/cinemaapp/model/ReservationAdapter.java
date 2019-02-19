@@ -25,7 +25,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
     private List<Reservation> reservationList = new ArrayList<>();
     private Fragment context;
-    private Dialog popup;
 
     public ReservationAdapter(Fragment context) {
 
@@ -48,6 +47,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         TextView textStartingTime;
         TextView reservedSeats;
         ImageView qrCode;
+        Dialog popup;
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         ReservationHolder(@NonNull View itemView) {
@@ -72,6 +72,23 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
                     openPopup();
                     reservedSeats.setText(reservationObject.getPlaces().toString());
                     qrCode.setImageBitmap(reservationObject.getCodeQR());
+                    openPopup();
+                }
+            });
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        private void openPopup(){
+
+
+            popup.show();
+
+            ImageView close = popup.findViewById(R.id.close_popup);
+            close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    popup.dismiss();
                 }
             });
         }
@@ -84,21 +101,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         context.startActivity(intent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void openPopup(){
-
-        popup.setContentView(R.layout.popup_activity);
-        popup.show();
-
-        ImageView close = popup.findViewById(R.id.close_popup);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                popup.dismiss();
-            }
-        });
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
@@ -114,10 +116,10 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     @Override
     public void onBindViewHolder(@NonNull ReservationAdapter.ReservationHolder reservationHolder, int position) {
 
-        Reservation reservation = reservationList.get(position);
+        reservationHolder.reservationObject = reservationList.get(position);
 
-        reservationHolder.textTitle.setText(reservation.getFilm().getTitle());
-        reservationHolder.textStartingTime.setText(reservation.getStartTime().toString());
+        reservationHolder.textTitle.setText(reservationHolder.reservationObject.getFilm().getTitle());
+        reservationHolder.textStartingTime.setText(reservationHolder.reservationObject.getStartTime().toString());
     }
 
     @Override

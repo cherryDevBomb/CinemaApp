@@ -1,7 +1,8 @@
-# CinemaApp
+# Cinema App
 
-<img src="captures/design.png">
 
+<<<<<<< HEAD
+=======
 ## Resources
 ### Material Design
 - BottomNavigation View
@@ -13,38 +14,6 @@
 ### Functionalities
 - QR Generation
     - https://medium.com/@aanandshekharroy/generate-barcode-in-android-app-using-zxing-64c076a5d83a  
-
-### MVP Architecture
-- https://medium.com/cr8resume/make-you-hand-dirty-with-mvp-model-view-presenter-eab5b5c16e42
+>>>>>>> d50cf321fe7214419462a924f949c851876851a0
 
 
-
-### Tasks
-taskuri generale:
-
-- home page
-- favorites page (like home)
-
-- your reservations page
-
-- make reservation page
-
-taskuri concrete
-- class film
-    + title
-    + genre
-    + description
-    + rating
-
-- class reservation 
-    + film
-    + hour
-    + qr code (img)
-
-
-
-
-
-
-
-- optional * start page
