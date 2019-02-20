@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.controls.SwipeButton;
 import com.example.cinemaapp.model.Film;
-import com.example.cinemaapp.model.GridViewAdapter;
+import com.example.cinemaapp.adapters.GridViewAdapter;
 import com.example.cinemaapp.presenter.MakeReservationPresenter;
 import com.example.cinemaapp.repository.Repository;
 

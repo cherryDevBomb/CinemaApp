@@ -7,9 +7,7 @@
     android:layout_width="350dp"
     android:layout_height="400dp"
     android:padding="5dp"
-    android:layout_gravity="center"
-
-    >
+    android:layout_gravity="center" >
 
     <ImageView
         android:id="@+id/close_popup"
@@ -62,21 +60,14 @@
 
     <TextView
         android:id="@+id/reserved_seats"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginLeft="60dp"
         android:layout_marginTop="7dp"
         android:layout_below="@+id/seats"
-        android:layout_toLeftOf="@+id/popup"
-        android:layout_toRightOf="@+id/popup"
-        android:layout_toStartOf="@+id/popup"
-        android:layout_toEndOf="@+id/popup"
         android:text="Seats"
+        android:gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="19sp"
-        android:textStyle="bold"
-        tools:ignore="NotSibling"
-        />
+        android:textStyle="bold" />
 
 </RelativeLayout>

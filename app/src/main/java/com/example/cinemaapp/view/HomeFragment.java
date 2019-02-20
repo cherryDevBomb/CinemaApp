@@ -13,25 +13,23 @@ import android.widget.Spinner;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Film;
-import com.example.cinemaapp.model.FilmAdapter;
-import com.example.cinemaapp.presenter.Presenter;
+import com.example.cinemaapp.adapters.FilmAdapter;
+import com.example.cinemaapp.presenter.HomePresenter;
 import com.example.cinemaapp.repository.Repository;
-
-import android.widget.Button;
 
 import java.util.List;
 
-public class HomeActivity extends Fragment {
+public class HomeFragment extends Fragment {
 
-    private Presenter homeActivityPresenter;
+    private HomePresenter homeActivityPresenter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        homeActivityPresenter = new Presenter();
+        homeActivityPresenter = new HomePresenter();
 
-        final View view = inflater.inflate(R.layout.fragment_home_activity, container, false);
+        final View view = inflater.inflate(R.layout.fragment_home, container, false);
         final Fragment pointerSaver = this;
 
         //Add recyclerView

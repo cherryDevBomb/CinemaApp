@@ -14,8 +14,7 @@ import android.view.View;
 
 import com.example.cinemaapp.R;
 import com.example.cinemaapp.model.Reservation;
-import com.example.cinemaapp.model.ReservationAdapter;
-import com.example.cinemaapp.repository.Repository;
+import com.example.cinemaapp.adapters.ReservationAdapter;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +31,7 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
         super(0, ItemTouchHelper.LEFT);
 
         this.rAdapter = adapter;
-        rAdapter.setReservationList(testListReservation());
+        rAdapter.setReservationList(Repository.getReservationList());
 
         icon = ContextCompat.getDrawable(Objects.requireNonNull(rAdapter.getContext().getActivity()), R.drawable.ic_delete_sweep_black_24dp);
 
@@ -90,7 +89,7 @@ public class SwipeToDelete extends ItemTouchHelper.SimpleCallback {
     }
 
 
-    private List<Reservation> testListReservation() {
+    private List<Reservation> Repository.getReservationList() {
 
         return Repository.getReservationList();
     }

@@ -1,6 +1,5 @@
-package com.example.cinemaapp.model;
+package com.example.cinemaapp.adapters;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -15,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cinemaapp.R;
+import com.example.cinemaapp.model.Film;
+import com.example.cinemaapp.model.Reservation;
 import com.example.cinemaapp.repository.Repository;
 
 import java.sql.Date;
@@ -134,8 +135,6 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
         Time time = reservationHolder.reservationObject.getStartTime();
         Date date = new Date(time.getTime());
-
-        //@SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("kk:mm");
 
         DateFormat dateFormat = new SimpleDateFormat("kk:mm");
         reservationHolder.textStartingTime.setText(dateFormat.format(date));

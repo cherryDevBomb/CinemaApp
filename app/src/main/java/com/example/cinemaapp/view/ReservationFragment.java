@@ -13,15 +13,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.model.Reservation;
-import com.example.cinemaapp.model.ReservationAdapter;
+import com.example.cinemaapp.adapters.ReservationAdapter;
 import com.example.cinemaapp.controls.SwipeToDelete;
 import com.example.cinemaapp.repository.Repository;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class ReservationPage extends Fragment implements Serializable {
+public class ReservationFragment extends Fragment implements Serializable {
 
 
 
@@ -29,7 +27,7 @@ public class ReservationPage extends Fragment implements Serializable {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_reservation_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_reservation, container, false);
 
         //adding recycler view to fragment
         RecyclerView recyclerView = view.findViewById(R.id.reservation_recycler_view);
@@ -37,7 +35,7 @@ public class ReservationPage extends Fragment implements Serializable {
         recyclerView.setHasFixedSize(true);
 
         ReservationAdapter rAdapter = new ReservationAdapter(this);
-        rAdapter.setReservationList(testListReservation());
+        rAdapter.setReservationList(Repository.getReservationList());
 
         recyclerView.setAdapter(rAdapter);
 
@@ -53,12 +51,6 @@ public class ReservationPage extends Fragment implements Serializable {
 
         return view;
     }
-
-    private List<Reservation> testListReservation() {
-
-        return Repository.getReservationList();
-    }
-
 }
 
 

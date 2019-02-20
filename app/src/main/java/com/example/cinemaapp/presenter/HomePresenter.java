@@ -6,7 +6,7 @@ import com.example.cinemaapp.repository.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Presenter {
+public class HomePresenter {
 
     List<Film> filmList = Repository.getHardcodedList();
 

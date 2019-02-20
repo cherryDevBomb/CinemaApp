@@ -1,4 +1,4 @@
-package com.example.cinemaapp.model;
+package com.example.cinemaapp.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.cinemaapp.model.Film;
 import com.example.cinemaapp.repository.Repository;
 import com.example.cinemaapp.view.MakeReservationActivity;
 import com.example.cinemaapp.R;
@@ -29,27 +30,28 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
-    private List<Film> filmlist = new ArrayList<>();
+public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapter.FavoriteFilmHolder> {
+    private List<Film> filmlist = Repository.favoriteList;
     private Fragment contextGetter;
     private int mExpandedPosition = -1;
 
-    public FilmAdapter(Fragment contextGetter) {
+    public FavoriteFilmAdapter(Fragment contextGetter) {
         this.contextGetter = contextGetter;
     }
 
     @NonNull
     @Override
-    public FilmHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavoriteFilmHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.film_card, parent, false);
-        return new FilmHolder(itemView);
+        return new FavoriteFilmHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final FilmHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final FavoriteFilmHolder holder, final int position) {
         Film currentFilm = filmlist.get(position);
         holder.filmObject = currentFilm;
+        holder.position = position;
         holder.poster.setImageResource(currentFilm.getImagePath());
         holder.textViewTitle.setText(currentFilm.getTitle());
         holder.textViewGenre.setText(currentFilm.getGenre());
@@ -59,8 +61,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         HashMap<Time, List<Boolean>> thisFilmProgram = Repository.getHardcodedProgram().get(currentFilm.getTitle());
         List<Time> times = new ArrayList<Time>(thisFilmProgram.keySet());
         for (int i = 0; i < times.size(); i++) {
-            Date date = new Date(times.get(i).getTime());
-            DateFormat df = new SimpleDateFormat("kk:mm");
+            Date date=new Date(times.get(i).getTime());
+            DateFormat df= new SimpleDateFormat("HH:mm");
             holder.buttons.get(i).setText(df.format(date));
             holder.buttons.get(i).setVisibility(View.VISIBLE);
         }
@@ -68,21 +70,27 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         boolean isFavorite = Repository.searchInFavorites(currentFilm);
         if (isFavorite) {
             holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
-        } else {
+        }
+        else {
             holder.favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
         }
 
+
         //expand card
-        final boolean isExpanded = position == mExpandedPosition;
-        holder.detailsOnExpand.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        int expandedIconId = isExpanded ? R.drawable.ic_keyboard_arrow_up_black_24dp : R.drawable.ic_keyboard_arrow_down_black_24dp;
-        holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, expandedIconId, 0);
+        final boolean isExpanded = position==mExpandedPosition;
+        holder.detailsOnExpand.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
-                mExpandedPosition = isExpanded ? -1 : position;
+                if (!isExpanded) {
+                    holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_up_black_24dp, 0);
+                }
+                else {
+                    holder.expandIcon.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_down_black_24dp, 0);
+                }
+                mExpandedPosition = isExpanded ? -1:position;
                 TransitionManager.beginDelayedTransition(holder.detailsOnExpand);
                 notifyDataSetChanged();
             }
@@ -98,8 +106,9 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         this.filmlist = filmlist;
     }
 
-    class FilmHolder extends RecyclerView.ViewHolder {
+    class FavoriteFilmHolder extends RecyclerView.ViewHolder {
         private Film filmObject;
+        private int position;
 
         private ImageView poster;
         private TextView textViewTitle;
@@ -114,7 +123,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
         private Button favorite;
 
 
-        public FilmHolder(final View itemView) {
+        public FavoriteFilmHolder(final View itemView) {
             super(itemView);
 
             poster = itemView.findViewById(R.id.film_poster);
@@ -126,7 +135,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
 
             List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4);
-            for (int i = 0; i < ids.size(); i++) {
+            for (int i = 0; i < 4; i++) {
                 final RadioButton button = itemView.findViewById(ids.get(i));
                 buttons.add(button);
             }
@@ -156,10 +165,21 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_red_35dp, 0);
                         filmObject.setFavorite(true);
                         Repository.addToFavorites(filmObject);
-                    } else {
+
+                    }
+                    else {
                         favorite.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_favorite_border_black_35dp, 0);
                         filmObject.setFavorite(false);
-                        Repository.deleteFromFavorites(filmObject);
+                        filmlist.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, filmlist.size());
+
+                        if (Repository.favoriteList.isEmpty()) {
+                            final TextView header = contextGetter.getView().findViewById(R.id.no_favorites_message_header);
+                            header.setVisibility(View.VISIBLE);
+                            final TextView body = contextGetter.getView().findViewById(R.id.no_favorites_message_body);
+                            body.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });

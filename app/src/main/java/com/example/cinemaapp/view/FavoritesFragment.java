@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.model.FavoriteFilmAdapter;
+import com.example.cinemaapp.adapters.FavoriteFilmAdapter;
 import com.example.cinemaapp.repository.Repository;
 
 
-public class FavoritesActivity extends Fragment {
+public class FavoritesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
