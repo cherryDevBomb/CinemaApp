@@ -103,32 +103,6 @@ public class Repository {
         }
     }
 
-
-//    public static HashMap<String, HashMap<Time, List<Boolean>>> getHardcodedProgram() {
-//        if (program == null) {
-//            program = new HashMap<>();
-//            List<Film> films = getHardcodedList();
-//            List<List<Time>> posibilities = Arrays.asList(
-//                    Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0)),
-//                    Arrays.asList(new Time(11, 0, 0), new Time(14, 30, 0), new Time(18, 0, 0)),
-//                    Arrays.asList(new Time(12, 30, 0), new Time(16, 0, 0), new Time(19, 30, 0)),
-//                    Arrays.asList(new Time(12, 0, 0), new Time(17, 0, 0)),
-//                    Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0)),
-//                    Arrays.asList(new Time(15, 0, 0), new Time(20, 0, 0))
-//            );
-//            Random r = new Random();
-//            for (Film f : films) {
-//                List<Time> thisFilmTimes = posibilities.get(r.nextInt(5));
-//                HashMap<Time, List<Boolean>> thisFilmProgram = new HashMap<>();
-//                for (Time t : thisFilmTimes) {
-//                    thisFilmProgram.put(t, Arrays.asList(true, true, true, true, true, true, true, true, true));
-//                }
-//                program.put(f.getTitle(), thisFilmProgram);
-//            }
-//        }
-//        return program;
-//    }
-
     public static HashMap<String, HashMap<Time, List<Boolean>>> getHardcodedProgram() {
         if (program == null) {
             program = new HashMap<>();
