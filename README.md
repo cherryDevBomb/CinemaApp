@@ -40,7 +40,6 @@ Choose places and confirm.
 Manage your reservation - see reservation details or remove it.  
 Use the in-app ticket to skip long lines at the cinema.
 
----
 
 ## Authors
 * Olga Turcan - [cherryDevBomb](https://github.com/cherryDevBomb)
