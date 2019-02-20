@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/program_delimiter"
-                android:text="Tonight's availability"
+                android:text="Today's availability"
                 android:textColor="@color/colorPrimary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 />

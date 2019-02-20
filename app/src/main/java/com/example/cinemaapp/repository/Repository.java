@@ -139,8 +139,8 @@ public class Repository {
                     Arrays.asList(new Time(11, 0, 0), new Time(14, 30, 0), new Time(18, 0, 0)),
                     Arrays.asList(new Time(12, 30, 0), new Time(16, 0, 0), new Time(19, 30, 0)),
                     Arrays.asList(new Time(12, 0, 0), new Time(17, 0, 0)),
-                    Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0)),
-                    Arrays.asList(new Time(15, 0, 0), new Time(20, 0, 0))
+                    Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0))
+
             );
             int i = 0;
             for (Film f : films) {
