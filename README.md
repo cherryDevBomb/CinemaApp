@@ -18,6 +18,7 @@ It also saves you time by replacing long lines with an `in-app integrated ticket
 * Push notifications - remind users about their reserved upcoming movie / new movie premieres
 * Data persistence
 * REST API for fetching movie data
+* Undo functionality for deleted reservation
 
 ## Demo
 Scroll through the list to explore the movie collection.
