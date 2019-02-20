@@ -38,8 +38,9 @@ Choose places and confirm.
 <img src="/screenshots/gif4.gif" width="270">
 
 Manage your reservation - see reservation details or remove it.  
-Use the in-app ticket to skip long lines at the cinema.
+Use the in-app ticket to skip long lines at the cinema.  
 
+<img src="/screenshots/gif5.gif" width="270">
 
 ## Authors
 * Olga Turcan - [cherryDevBomb](https://github.com/cherryDevBomb)
