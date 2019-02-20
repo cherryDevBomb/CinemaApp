@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.cinemaapp.R;
-import com.example.cinemaapp.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
