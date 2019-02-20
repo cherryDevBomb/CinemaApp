@@ -135,10 +135,10 @@ public class Repository {
             program = new HashMap<>();
             List<Film> films = getHardcodedList();
             List<List<Time>> posibilities = Arrays.asList(
+                    Arrays.asList(new Time(12, 0, 0), new Time(17, 0, 0), new Time(20, 30, 0)),
                     Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0)),
                     Arrays.asList(new Time(11, 0, 0), new Time(14, 30, 0), new Time(18, 0, 0)),
                     Arrays.asList(new Time(12, 30, 0), new Time(16, 0, 0), new Time(19, 30, 0)),
-                    Arrays.asList(new Time(12, 0, 0), new Time(17, 0, 0)),
                     Arrays.asList(new Time(10, 0, 0), new Time(13, 30, 0), new Time(17, 0, 0))
 
             );

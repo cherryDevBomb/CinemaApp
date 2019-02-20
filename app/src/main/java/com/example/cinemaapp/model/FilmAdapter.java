@@ -126,7 +126,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             detailsOnExpand = itemView.findViewById(R.id.details_on_expand);
 
             List<Integer> ids = Arrays.asList(R.id.radio1, R.id.radio2, R.id.radio3, R.id.radio4);
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < ids.size(); i++) {
                 final RadioButton button = itemView.findViewById(ids.get(i));
                 buttons.add(button);
             }
