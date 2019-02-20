@@ -148,9 +148,9 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
         reservationHolder.textTitle.setText(reservationHolder.reservationObject.getFilm().getTitle());
 
-        Time time = reservationHolder.reservationObject.getStartTime();
+        Time time = reservationHolder.reservationObject.getStartTime();;
         Date date = new Date(time.getTime());
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("kk:mm");
         reservationHolder.textStartingTime.setText(dateFormat.format(date));
     }
 
