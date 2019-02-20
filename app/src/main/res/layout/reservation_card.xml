@@ -32,36 +32,38 @@
             android:layout_below="@id/film_title_text"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:text="Starting Time"
             android:textColor="@color/titleColor"
-            android:textSize="18sp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
 
         <ImageView
             android:id="@+id/clock_img"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="210dp"
-            android:layout_marginLeft="210dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="265dp"
+            android:layout_marginLeft="265dp"
             android:layout_below="@id/film_title_text"
             android:src="@drawable/ic_access_time_black_24dp" />
 
         <Button
             android:id="@+id/detail_button"
             android:layout_width="wrap_content"
-            android:layout_height="34dp"
+            android:layout_height="37dp"
             android:layout_below="@id/film_title_text"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="7dp"
             android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
             android:text="Ticket Detail"
             android:textColor="@color/titleColor"
-            android:textSize="16sp"
+            android:textSize="19sp"
             android:textStyle="bold"
-
-            android:layout_marginLeft="10dp" />
+             />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

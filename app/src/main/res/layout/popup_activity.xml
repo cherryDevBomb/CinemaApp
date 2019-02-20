@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/popup"
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="400dp"
     android:padding="5dp"
     android:layout_gravity="center"
-    android:background="@color/popUpColor"
 
     >
 
@@ -24,10 +24,11 @@
         android:id="@+id/qr_code"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/qrcode" />
+        android:layout_marginTop="40dp"
+        android:src="@drawable/qrcode"
+        />
 
     <TextView
         android:id="@+id/scan_text"
@@ -35,9 +36,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/qr_code"
+        android:layout_toLeftOf="@+id/popup"
+        android:layout_toRightOf="@+id/popup"
+        android:layout_toStartOf="@+id/popup"
+        android:layout_toEndOf="@+id/popup"
         android:text="Scan this at the entrance!"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:ignore="NotSibling"
         />
 
     <ImageView
@@ -46,8 +55,9 @@
         android:layout_height="50dp"
         android:src="@drawable/seats"
         android:layout_marginTop="30dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_below="@+id/scan_text"
         />
 
     <TextView
@@ -56,10 +66,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/seats"
+        android:layout_toLeftOf="@+id/popup"
+        android:layout_toRightOf="@+id/popup"
+        android:layout_toStartOf="@+id/popup"
+        android:layout_toEndOf="@+id/popup"
         android:text="Seats"
         android:textColor="@color/colorPrimary"
-        android:textSize="17sp"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:ignore="NotSibling"
         />
 
-</LinearLayout>
+</RelativeLayout>

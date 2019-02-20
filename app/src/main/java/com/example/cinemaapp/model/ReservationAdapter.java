@@ -1,5 +1,6 @@
 package com.example.cinemaapp.model;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -133,6 +134,9 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
         Time time = reservationHolder.reservationObject.getStartTime();
         Date date = new Date(time.getTime());
+
+        //@SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("kk:mm");
+
         DateFormat dateFormat = new SimpleDateFormat("kk:mm");
         reservationHolder.textStartingTime.setText(dateFormat.format(date));
     }
